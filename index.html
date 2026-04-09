@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vedic Horoscope — Your Daily Vedic Wisdom</title>
+  <meta name="description" content="Discover your destiny with AI-powered Vedic astrology. Daily horoscopes, natal charts, and personalized cosmic insights based on ancient Jyotish traditions." />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #07091a;
+      --card: #0d1130;
+      --card-border: #1e2448;
+      --gold: #e8a838;
+      --gold-light: #f0c060;
+      --cream: #f5efe0;
+      --text: #d4cbb8;
+      --text-dim: #7a7560;
+      --purple: #9060e0;
+      --error: #e05555;
+      --cyan: #60c8e8;
+      --radius: 14px;
+      --radius-lg: 20px;
+      --max-w: 1100px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Starfield ── */
+    #starfield {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      animation: blink var(--dur) ease-in-out infinite alternate;
+    }
+    @keyframes blink {
+      0% { opacity: 0.1; }
+      100% { opacity: var(--max-o); }
+    }
+
+    /* ── Layout ── */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    section { padding: 80px 0; }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(7, 9, 26, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(30, 36, 72, 0.5);
+    }
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .nav-om {
+      font-size: 28px;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(232, 168, 56, 0.4);
+    }
+    .nav-title {
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold) !important;
+      color: var(--bg) !important;
+      padding: 8px 20px;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 12px !important;
+      letter-spacing: 1px;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--cream);
+      margin: 5px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 64px;
+    }
+    .hero-content { max-width: 600px; }
+    .hero-om {
+      font-size: 72px;
+      color: var(--gold);
+      text-shadow: 0 0 40px rgba(232, 168, 56, 0.35), 0 0 80px rgba(232, 168, 56, 0.15);
+      margin-bottom: 24px;
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { text-shadow: 0 0 40px rgba(232,168,56,0.35), 0 0 80px rgba(232,168,56,0.15); }
+      50% { text-shadow: 0 0 60px rgba(232,168,56,0.5), 0 0 120px rgba(232,168,56,0.25); }
+    }
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 300;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .hero-tagline {
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 32px;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 24px auto;
+      max-width: 400px;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(232, 168, 56, 0.2);
+    }
+    .divider-star { color: var(--gold); font-size: 14px; }
+
+    .hero-desc {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 40px;
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--bg);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 16px 40px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 14px 36px;
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+      text-decoration: none;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--cream); }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── Section Headers ── */
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .section-title {
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+
+    /* ── Features ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .feature-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+      border: 1px solid;
+    }
+    .feature-icon.gold { background: rgba(232,168,56,0.1); border-color: rgba(232,168,56,0.3); }
+    .feature-icon.purple { background: rgba(144,96,224,0.1); border-color: rgba(144,96,224,0.3); }
+    .feature-icon.cyan { background: rgba(96,200,232,0.1); border-color: rgba(96,200,232,0.3); }
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+    .feature-card p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-dim);
+    }
+
+    /* ── How it Works ── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .step {
+      text-align: center;
+      position: relative;
+    }
+    .step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(232,168,56,0.1);
+      border: 1px solid rgba(232,168,56,0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .step h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .step p {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* ── Phone Mockup ── */
+    .showcase {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+    }
+    .showcase-phone {
+      flex-shrink: 0;
+      width: 280px;
+      height: 560px;
+      background: var(--card);
+      border: 2px solid var(--card-border);
+      border-radius: 36px;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(232,168,56,0.05);
+    }
+    .phone-notch {
+      width: 120px;
+      height: 28px;
+      background: var(--bg);
+      border-radius: 0 0 16px 16px;
+      margin: 0 auto 20px;
+    }
+    .phone-screen {
+      text-align: center;
+      padding: 0 8px;
+    }
+    .phone-screen .p-om {
+      font-size: 40px;
+      color: var(--gold);
+      text-shadow: 0 0 30px rgba(232,168,56,0.3);
+      margin-bottom: 8px;
+    }
+    .phone-screen .p-title {
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 4px;
+    }
+    .phone-screen .p-tag {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+    }
+    .phone-card {
+      background: rgba(13,17,48,0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+    .phone-card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .phone-card-icon.gold-bg { background: rgba(232,168,56,0.15); border: 1px solid rgba(232,168,56,0.3); }
+    .phone-card-icon.purple-bg { background: rgba(144,96,224,0.15); border: 1px solid rgba(144,96,224,0.3); }
+    .phone-card-text h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 2px;
+    }
+    .phone-card-text p {
+      font-size: 10px;
+      color: var(--text-dim);
+    }
+    .phone-tab-bar {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-top: 1px solid var(--card-border);
+    }
+    .phone-tab {
+      text-align: center;
+      font-size: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .phone-tab.active { color: var(--gold); }
+    .phone-tab.inactive { color: var(--text-dim); }
+    .phone-tab span { display: block; font-size: 16px; margin-bottom: 2px; }
+
+    .showcase-info { flex: 1; }
+    .showcase-info h2 {
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+    .showcase-info p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .showcase-list {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+    .showcase-list li {
+      padding: 8px 0;
+      font-size: 14px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .showcase-list li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: 12px;
+    }
+
+    /* ── Pricing ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .pricing-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .pricing-card.featured {
+      border-color: var(--gold);
+      position: relative;
+    }
+    .pricing-card.featured::before {
+      content: 'BEST VALUE';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--bg);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 4px 16px;
+      border-radius: 20px;
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-card h3 {
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .pricing-price {
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+    }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+    .pricing-features li {
+      padding: 8px 0;
+      font-size: 14px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .pricing-features li.disabled { color: var(--text-dim); }
+    .pricing-features li.disabled::before { content: '—'; color: var(--text-dim); font-weight: 400; }
+
+    /* ── Fortune Card ── */
+    .fortune-section {
+      text-align: center;
+      padding: 80px 0;
+    }
+    .fortune-card {
+      max-width: 540px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(144,96,224,0.15), rgba(144,96,224,0.05));
+      border: 1px solid rgba(144,96,224,0.3);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+    }
+    .fortune-emoji { font-size: 36px; margin-bottom: 16px; }
+    .fortune-text {
+      font-size: 17px;
+      font-style: italic;
+      line-height: 1.8;
+      color: var(--cream);
+    }
+
+    /* ── Languages ── */
+    .lang-pills {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .lang-pill {
+      padding: 10px 24px;
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      color: var(--text-dim);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: 0.3s;
+    }
+    .lang-pill.active {
+      border-color: var(--gold);
+      background: rgba(232,168,56,0.1);
+      color: var(--gold);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 40px 0;
+      text-align: center;
+    }
+    .footer-om {
+      font-size: 32px;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(232,168,56,0.3);
+      margin-bottom: 12px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* ── Orbital Loader decoration ── */
+    .orbital {
+      width: 160px;
+      height: 160px;
+      position: relative;
+      margin: 0 auto 40px;
+    }
+    .orbital-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px; height: 60px;
+      background: rgba(232,168,56,0.1);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: var(--gold);
+      animation: center-pulse 2s ease-in-out infinite;
+    }
+    @keyframes center-pulse {
+      0%,100% { box-shadow: 0 0 20px rgba(232,168,56,0.2); }
+      50% { box-shadow: 0 0 40px rgba(232,168,56,0.4); }
+    }
+    .orbital-ring {
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(232,168,56,0.15);
+      border-radius: 50%;
+      animation: orbit-spin 8s linear infinite;
+    }
+    .orbital-planet {
+      position: absolute;
+      font-size: 16px;
+      transform: translate(-50%, -50%);
+    }
+    .orbital-planet:nth-child(1) { top: 0; left: 50%; }
+    .orbital-planet:nth-child(2) { top: 50%; left: 100%; }
+    .orbital-planet:nth-child(3) { top: 100%; left: 50%; }
+    .orbital-planet:nth-child(4) { top: 50%; left: 0; }
+    @keyframes orbit-spin { to { transform: rotate(360deg); } }
+
+    /* ── Animations on scroll ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0; right: 0;
+        background: rgba(7,9,26,0.95);
+        backdrop-filter: blur(20px);
+        padding: 24px;
+        gap: 20px;
+        border-bottom: 1px solid var(--card-border);
+      }
+      .hero h1 { font-size: 28px; letter-spacing: 4px; }
+      .hero-om { font-size: 52px; }
+      .section-title { font-size: 22px; letter-spacing: 3px; }
+      .showcase { flex-direction: column; gap: 40px; }
+      .showcase-phone { width: 240px; height: 480px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 380px; }
+      .steps { grid-template-columns: 1fr; gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Starfield -->
+  <div id="starfield"></div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="container">
+      <a href="#" class="nav-brand">
+        <span class="nav-om">&oplus;</span>
+        <span class="nav-title">Vedic Horoscope</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#download" class="nav-cta">Download</a>
+      </div>
+      <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-content fade-in">
+      <div class="hero-om">&oplus;</div>
+      <h1>Vedic Horoscope</h1>
+      <div class="divider">
+        <span class="divider-line"></span>
+        <span class="divider-star">&#10022;</span>
+        <span class="divider-line"></span>
+      </div>
+      <p class="hero-tagline">Ancient Wisdom, Modern Insight</p>
+      <p class="hero-desc">
+        Discover your cosmic path with AI-powered Vedic astrology.
+        Personalized daily horoscopes and natal charts based on
+        Jyotish traditions — crafted uniquely for you.
+      </p>
+      <div class="hero-buttons">
+        <a href="#download" class="btn-primary">Get Started</a>
+        <a href="#features" class="btn-secondary">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-icon">&#10022;</span>
+        <h2 class="section-title">Features</h2>
+        <div class="divider">
+          <span class="divider-line"></span>
+          <span class="divider-star">&#10022;</span>
+          <span class="divider-line"></span>
+        </div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon gold">&#9737;</div>
+          <h3>Daily Horoscope</h3>
+          <p>AI-generated readings based on your birth chart, current planetary transits, auspicious hours (muhurta), and a personal daily mantra.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon purple">&#9789;</div>
+          <h3>Natal Chart (Kundali)</h3>
+          <p>Complete birth chart analysis including Rashi, Nakshatras, and Dashas — your cosmic blueprint decoded by advanced AI.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon cyan">&#128302;</div>
+          <h3>Personalization</h3>
+          <p>Contextual insights enriched by your location, weather, moon phase, and calendar — making every reading uniquely yours.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon gold">&#128220;</div>
+          <h3>History</h3>
+          <p>Access your past 30 readings anytime. Track your cosmic journey and see how celestial patterns unfold over time.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon purple">&#127760;</div>
+          <h3>Multilingual</h3>
+          <p>Available in Polish, English, Ukrainian, and Czech. Your cosmic wisdom in your preferred language.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon cyan">&#128276;</div>
+          <h3>Daily Notifications</h3>
+          <p>Start each morning with cosmic guidance. Receive personalized horoscope notifications at your preferred time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Showcase -->
+  <section id="showcase">
+    <div class="container">
+      <div class="showcase">
+        <div class="showcase-phone fade-in">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="p-om">&oplus;</div>
+            <div class="p-title">Vedic Horoscope</div>
+            <div class="p-tag">Ancient Wisdom, Modern Insight</div>
+            <div class="phone-card">
+              <div class="phone-card-icon gold-bg">&#9737;</div>
+              <div class="phone-card-text">
+                <h4>Daily Horoscope</h4>
+                <p>Your personalized cosmic reading</p>
+              </div>
+            </div>
+            <div class="phone-card">
+              <div class="phone-card-icon purple-bg">&#9789;</div>
+              <div class="phone-card-text">
+                <h4>Natal Chart</h4>
+                <p>Complete Kundali analysis</p>
+              </div>
+            </div>
+          </div>
+          <div class="phone-tab-bar">
+            <div class="phone-tab active"><span>&#9737;</span>Home</div>
+            <div class="phone-tab inactive"><span>&#128220;</span>History</div>
+            <div class="phone-tab inactive"><span>&#9881;</span>Settings</div>
+          </div>
+        </div>
+        <div class="showcase-info fade-in">
+          <h2>Your Personal Astrologer</h2>
+          <div class="divider" style="margin-left:0; max-width:300px;">
+            <span class="divider-line"></span>
+            <span class="divider-star">&#10022;</span>
+            <span class="divider-line"></span>
+          </div>
+          <p>Vedic Horoscope combines ancient Jyotish wisdom with the power of artificial intelligence to deliver readings that are deeply personal, contextually aware, and beautifully presented.</p>
+          <ul class="showcase-list">
+            <li>Readings based on real planetary positions</li>
+            <li>Personalized with your exact birth data</li>
+            <li>Contextual: weather, moon phase, location</li>
+            <li>Beautiful shareable cosmic cards</li>
+            <li>Available in 4 languages</li>
+            <li>Premium & free tiers available</li>
+          </ul>
+          <a href="#download" class="btn-primary">Try It Free</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="orbital">
+          <div class="orbital-center">&oplus;</div>
+          <div class="orbital-ring">
+            <span class="orbital-planet">&#9791;</span>
+            <span class="orbital-planet">&#9792;</span>
+            <span class="orbital-planet">&#9794;</span>
+            <span class="orbital-planet">&#9795;</span>
+          </div>
+        </div>
+        <h2 class="section-title">How It Works</h2>
+        <div class="divider">
+          <span class="divider-line"></span>
+          <span class="divider-star">&#10022;</span>
+          <span class="divider-line"></span>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step fade-in">
+          <div class="step-num">1</div>
+          <h3>Enter Your Birth Data</h3>
+          <p>Date, time, and place of birth — the foundation of your Vedic chart.</p>
+        </div>
+        <div class="step fade-in">
+          <div class="step-num">2</div>
+          <h3>AI Analyzes Your Chart</h3>
+          <p>Advanced AI calculates planetary positions, transits, and Vedic aspects.</p>
+        </div>
+        <div class="step fade-in">
+          <div class="step-num">3</div>
+          <h3>Receive Your Reading</h3>
+          <p>A personalized, beautifully formatted horoscope — unique to this moment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fortune -->
+  <section class="fortune-section">
+    <div class="container">
+      <div class="fortune-card fade-in">
+        <div class="fortune-emoji">&#127834;</div>
+        <p class="fortune-text">
+          "The stars incline, they do not compel. Your birth chart is not a prison — it is a map of possibilities. Use its wisdom to navigate your journey with grace."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-icon">&#10022;</span>
+        <h2 class="section-title">Premium</h2>
+        <div class="divider">
+          <span class="divider-line"></span>
+          <span class="divider-star">&#10022;</span>
+          <span class="divider-line"></span>
+        </div>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card fade-in">
+          <h3>Free</h3>
+          <p class="pricing-price">Forever free</p>
+          <ul class="pricing-features">
+            <li>4 daily horoscopes / month</li>
+            <li>1 free natal chart reading</li>
+            <li>History access</li>
+            <li>All 4 languages</li>
+            <li class="disabled">Unlimited readings</li>
+            <li class="disabled">Full personalization</li>
+          </ul>
+          <a href="#download" class="btn-secondary">Get Started</a>
+        </div>
+        <div class="pricing-card featured fade-in">
+          <h3>Premium</h3>
+          <p class="pricing-price">Unlock your full cosmic potential</p>
+          <ul class="pricing-features">
+            <li>Unlimited daily horoscopes</li>
+            <li>Unlimited natal chart readings</li>
+            <li>Full history access</li>
+            <li>All 4 languages</li>
+            <li>Unlimited readings</li>
+            <li>Full contextual personalization</li>
+          </ul>
+          <a href="#download" class="btn-primary" style="width:100%;text-align:center;">Go Premium</a>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:20px; font-size:13px; color:var(--text-dim);">Cancel anytime. Prices set in-app via App Store / Google Play.</p>
+    </div>
+  </section>
+
+  <!-- Languages -->
+  <section>
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-icon">&#127760;</span>
+        <h2 class="section-title">Your Language</h2>
+        <div class="divider">
+          <span class="divider-line"></span>
+          <span class="divider-star">&#10022;</span>
+          <span class="divider-line"></span>
+        </div>
+        <p style="color:var(--text); max-width:500px; margin:0 auto;">Available in 4 languages with automatic detection based on your device settings.</p>
+      </div>
+      <div class="lang-pills fade-in">
+        <span class="lang-pill active">PL</span>
+        <span class="lang-pill">EN</span>
+        <span class="lang-pill">UA</span>
+        <span class="lang-pill">CS</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download CTA -->
+  <section id="download" style="padding-bottom: 100px;">
+    <div class="container" style="text-align:center;">
+      <div class="fade-in">
+        <div class="hero-om" style="font-size:56px; margin-bottom:20px;">&oplus;</div>
+        <h2 class="section-title" style="margin-bottom:12px;">Begin Your Journey</h2>
+        <div class="divider">
+          <span class="divider-line"></span>
+          <span class="divider-star">&#10022;</span>
+          <span class="divider-line"></span>
+        </div>
+        <p style="font-size:16px; line-height:1.8; color:var(--text); max-width:500px; margin:24px auto 40px;">Download Vedic Horoscope and discover the cosmic wisdom written in your stars. Your first reading is free.</p>
+        <div class="hero-buttons">
+          <a href="#" class="btn-primary">&#63743; App Store</a>
+          <a href="#" class="btn-primary" style="background:var(--cream);">&#9654; Google Play</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-om">&oplus;</div>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 Vedic Horoscope. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ── Starfield ──
+    (function() {
+      const field = document.getElementById('starfield');
+      for (let i = 0; i < 60; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        const size = Math.random() * 2 + 1;
+        s.style.width = size + 'px';
+        s.style.height = size + 'px';
+        s.style.left = Math.random() * 100 + '%';
+        s.style.top = Math.random() * 100 + '%';
+        s.style.setProperty('--dur', (Math.random() * 3 + 2) + 's');
+        s.style.setProperty('--max-o', (Math.random() * 0.6 + 0.3).toFixed(2));
+        s.style.animationDelay = (Math.random() * 4) + 's';
+        field.appendChild(s);
+      }
+    })();
+
+    // ── Scroll reveal ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
