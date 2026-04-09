@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://daddyd3v.github.io/VedicHoroscopeSite/</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daddyd3v.github.io/VedicHoroscopeSite/" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://daddyd3v.github.io/VedicHoroscopeSite/" />
+    <xhtml:link rel="alternate" hreflang="uk" href="https://daddyd3v.github.io/VedicHoroscopeSite/" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://daddyd3v.github.io/VedicHoroscopeSite/" />
+  </url>
+
+  <url>
+    <loc>https://daddyd3v.github.io/VedicHoroscopeSite/privacy.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daddyd3v.github.io/VedicHoroscopeSite/privacy.html" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://daddyd3v.github.io/VedicHoroscopeSite/privacy.html" />
+    <xhtml:link rel="alternate" hreflang="uk" href="https://daddyd3v.github.io/VedicHoroscopeSite/privacy.html" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://daddyd3v.github.io/VedicHoroscopeSite/privacy.html" />
+  </url>
+
+</urlset>

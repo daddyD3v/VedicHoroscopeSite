@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://daddyd3v.github.io/VedicHoroscopeSite/sitemap.xml
