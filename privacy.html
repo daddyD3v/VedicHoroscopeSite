@@ -7,12 +7,86 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #07091a; color: #d4cbb8; line-height: 1.7; }
-  header { background: #0d1130; border-bottom: 1px solid #1e2448; padding: 24px 20px; text-align: center; }
-  header h1 { color: #e8a838; font-size: 28px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; }
-  header p { color: #7a7560; font-size: 14px; margin-top: 6px; letter-spacing: 2px; }
-  .lang-bar { background: #0d1130; border-bottom: 1px solid #1e2448; display: flex; justify-content: center; gap: 8px; padding: 12px; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; }
+
+  /* ── Nav (same as index) ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(7, 9, 26, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(30, 36, 72, 0.5);
+  }
+  nav .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .nav-om {
+    font-size: 28px;
+    color: #e8a838;
+    text-shadow: 0 0 20px rgba(232, 168, 56, 0.4);
+  }
+  .nav-title {
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #f5efe0;
+  }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    color: #7a7560;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: #e8a838; }
+  .nav-back {
+    background: #e8a838 !important;
+    color: #07091a !important;
+    padding: 8px 20px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 12px !important;
+    letter-spacing: 1px;
+  }
+  .nav-back:hover { background: #f0c060 !important; }
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #f5efe0;
+    margin: 5px 0;
+    border-radius: 2px;
+  }
+
+  /* ── Lang bar ── */
+  .lang-bar { background: #0d1130; border-bottom: 1px solid #1e2448; display: flex; justify-content: center; gap: 8px; padding: 12px; flex-wrap: wrap; position: sticky; top: 64px; z-index: 99; }
   .lang-btn { background: transparent; border: 1px solid #1e2448; border-radius: 8px; color: #7a7560; cursor: pointer; font-size: 14px; padding: 6px 16px; transition: all 0.2s; }
   .lang-btn.active, .lang-btn:hover { background: #e8a838; border-color: #e8a838; color: #07091a; font-weight: 600; }
+
+  /* ── Content ── */
   .container { max-width: 800px; margin: 0 auto; padding: 40px 20px 80px; }
   .lang-section { display: none; }
   .lang-section.active { display: block; }
@@ -20,17 +94,78 @@
   p { color: #d4cbb8; font-size: 15px; margin-bottom: 12px; white-space: pre-line; }
   .updated { color: #7a7560; font-size: 13px; text-align: center; margin-bottom: 40px; }
   .divider { text-align: center; color: #e8a838; margin: 32px 0; opacity: 0.4; letter-spacing: 8px; }
-  footer { text-align: center; color: #7a7560; font-size: 12px; padding: 24px; border-top: 1px solid #1e2448; letter-spacing: 2px; }
-  footer a { color: #e8a838; text-decoration: none; margin: 0 12px; }
-  footer a:hover { text-decoration: underline; }
   a { color: #e8a838; }
+
+  /* ── Footer (same as index) ── */
+  footer {
+    border-top: 1px solid #1e2448;
+    padding: 40px 0;
+    text-align: center;
+  }
+  .footer-om {
+    font-size: 32px;
+    color: #e8a838;
+    text-shadow: 0 0 20px rgba(232,168,56,0.3);
+    margin-bottom: 12px;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: #7a7560;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: #e8a838; }
+  .footer-copy {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #7a7560;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: block; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 64px;
+      left: 0; right: 0;
+      background: rgba(7,9,26,0.95);
+      backdrop-filter: blur(20px);
+      padding: 24px;
+      gap: 20px;
+      border-bottom: 1px solid #1e2448;
+    }
+  }
 </style>
 </head>
 <body>
-<header>
-  <h1>ॐ Vedic Horoscope</h1>
-  <p>Privacy Policy</p>
-</header>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-om">ॐ</span>
+      <span class="nav-title">Vedic Horoscope</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html" class="nav-back">Home</a>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div style="height:64px;"></div>
 
 <div class="lang-bar">
   <button class="lang-btn active" onclick="setLang('en')">English</button>
@@ -442,7 +577,13 @@ Důležité informace:
 </div>
 
 <footer>
-  <a href="index.html">← Back to Home</a> | daddyd3v@pm.me
+  <div class="footer-om">ॐ</div>
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Contact</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Vedic Horoscope. All rights reserved.</p>
 </footer>
 
 <script>
