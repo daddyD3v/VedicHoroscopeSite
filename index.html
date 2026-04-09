@@ -762,6 +762,100 @@
       .pricing-grid { grid-template-columns: 1fr; max-width: 380px; }
       .steps { grid-template-columns: 1fr; gap: 24px; }
     }
+
+    /* ── Waitlist Modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      max-width: 440px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      animation: modal-in 0.3s ease;
+    }
+    @keyframes modal-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 20px;
+      cursor: pointer;
+      transition: color 0.3s;
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--cream); }
+    .modal-icon { font-size: 40px; color: var(--gold); margin-bottom: 16px; }
+    .modal-title {
+      font-size: 20px;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .modal-desc {
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .modal-form { display: flex; gap: 8px; }
+    .modal-input {
+      flex: 1;
+      background: rgba(17,22,51,1);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 15px;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .modal-input::placeholder { color: var(--text-dim); }
+    .modal-input:focus { border-color: var(--gold); }
+    .modal-submit {
+      background: var(--gold);
+      color: var(--bg);
+      border: none;
+      border-radius: 10px;
+      padding: 14px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background 0.3s;
+      white-space: nowrap;
+    }
+    .modal-submit:hover { background: var(--gold-light); }
+    .modal-success {
+      display: none;
+      color: var(--gold);
+      font-size: 15px;
+      margin-top: 16px;
+    }
+    .modal-success.show { display: block; }
+    @media (max-width: 480px) {
+      .modal-form { flex-direction: column; }
+      .modal { padding: 32px 20px; }
+    }
   </style>
 </head>
 <body>
@@ -1046,7 +1140,7 @@
         </div>
         <p style="font-size:16px; line-height:1.8; color:var(--text); max-width:500px; margin:24px auto 40px;" data-i18n="dl_desc">Download Vedic Horoscope and discover the cosmic wisdom written in your stars. Your first reading is free.</p>
         <div class="store-buttons">
-          <a href="#" class="store-badge" aria-label="Download on the App Store">
+          <a href="#" class="store-badge" aria-label="Download on the App Store" onclick="event.preventDefault();openWaitlist()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="150" height="50">
               <rect width="120" height="40" rx="5" fill="#000"/>
               <rect x=".5" y=".5" width="119" height="39" rx="4.5" fill="none" stroke="#a6a6a6"/>
@@ -1057,7 +1151,7 @@
               </g>
             </svg>
           </a>
-          <a href="#" class="store-badge" aria-label="Get it on Google Play">
+          <a href="#" class="store-badge" aria-label="Get it on Google Play" onclick="event.preventDefault();openWaitlist()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135 40" width="168" height="50">
               <rect width="135" height="40" rx="5" fill="#000"/>
               <rect x=".5" y=".5" width="134" height="39" rx="4.5" fill="none" stroke="#a6a6a6"/>
@@ -1090,6 +1184,21 @@
       <p class="footer-copy">&copy; 2026 Vedic Horoscope. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Waitlist Modal -->
+  <div class="modal-overlay" id="waitlistModal" onclick="if(event.target===this)closeWaitlist()">
+    <div class="modal">
+      <button class="modal-close" onclick="closeWaitlist()">&times;</button>
+      <div class="modal-icon">&#10022;</div>
+      <h3 class="modal-title" data-i18n="wl_title">Coming Soon</h3>
+      <p class="modal-desc" data-i18n="wl_desc">We're currently in testing. Join the waitlist and be the first to know when Vedic Horoscope launches!</p>
+      <form class="modal-form" id="waitlistForm" action="YOUR_FORMSPREE_ENDPOINT" method="POST" onsubmit="return submitWaitlist(event)">
+        <input type="email" name="email" class="modal-input" placeholder="your@email.com" required data-i18n-placeholder="wl_placeholder" />
+        <button type="submit" class="modal-submit" data-i18n="wl_submit">Join</button>
+      </form>
+      <p class="modal-success" id="waitlistSuccess" data-i18n="wl_success">&#10003; You're on the list! We'll let you know.</p>
+    </div>
+  </div>
 
   <script>
     // ── Translations ──
@@ -1161,7 +1270,12 @@
         dl_desc: "Download Vedic Horoscope and discover the cosmic wisdom written in your stars. Your first reading is free.",
         footer_privacy: "Privacy Policy",
         footer_terms: "Terms of Service",
-        footer_contact: "Contact"
+        footer_contact: "Contact",
+        wl_title: "Coming Soon",
+        wl_desc: "We're currently in testing. Join the waitlist and be the first to know when Vedic Horoscope launches!",
+        wl_placeholder: "your@email.com",
+        wl_submit: "Join",
+        wl_success: "\u2713 You're on the list! We'll let you know."
       },
       pl: {
         meta_title: "Vedic Horoscope — Twoja codzienna wedyjska m\u0105dro\u015B\u0107",
@@ -1230,7 +1344,12 @@
         dl_desc: "Pobierz Vedic Horoscope i odkryj kosmiczn\u0105 m\u0105dro\u015B\u0107 zapisan\u0105 w Twoich gwiazdach. Pierwszy odczyt jest darmowy.",
         footer_privacy: "Polityka prywatno\u015Bci",
         footer_terms: "Regulamin",
-        footer_contact: "Kontakt"
+        footer_contact: "Kontakt",
+        wl_title: "Ju\u017C wkr\u00F3tce",
+        wl_desc: "Aplikacja jest w fazie test\u00F3w. Do\u0142\u0105cz do listy oczekuj\u0105cych i dowiedz si\u0119 pierwszy o premierze!",
+        wl_placeholder: "twoj@email.com",
+        wl_submit: "Do\u0142\u0105cz",
+        wl_success: "\u2713 Jeste\u015B na li\u015Bcie! Damy Ci zna\u0107."
       },
       ua: {
         meta_title: "Vedic Horoscope — \u0412\u0430\u0448\u0430 \u0449\u043E\u0434\u0435\u043D\u043D\u0430 \u0432\u0435\u0434\u0438\u0447\u043D\u0430 \u043C\u0443\u0434\u0440\u0456\u0441\u0442\u044C",
@@ -1299,7 +1418,12 @@
         dl_desc: "\u0417\u0430\u0432\u0430\u043D\u0442\u0430\u0436\u0442\u0435 Vedic Horoscope \u0456 \u0432\u0456\u0434\u043A\u0440\u0438\u0439\u0442\u0435 \u043A\u043E\u0441\u043C\u0456\u0447\u043D\u0443 \u043C\u0443\u0434\u0440\u0456\u0441\u0442\u044C, \u0437\u0430\u043F\u0438\u0441\u0430\u043D\u0443 \u0443 \u0432\u0430\u0448\u0438\u0445 \u0437\u0456\u0440\u043A\u0430\u0445. \u041F\u0435\u0440\u0448\u0438\u0439 \u043E\u0434\u0447\u0438\u0442 \u0431\u0435\u0437\u043A\u043E\u0448\u0442\u043E\u0432\u043D\u0438\u0439.",
         footer_privacy: "Privacy Policy",
         footer_terms: "Terms of Service",
-        footer_contact: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442"
+        footer_contact: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442",
+        wl_title: "\u0412\u0436\u0435 \u043D\u0435\u0437\u0430\u0431\u0430\u0440\u043E\u043C",
+        wl_desc: "\u0414\u043E\u0434\u0430\u0442\u043E\u043A \u0437\u0430\u0440\u0430\u0437 \u0442\u0435\u0441\u0442\u0443\u0454\u0442\u044C\u0441\u044F. \u041F\u0440\u0438\u0454\u0434\u043D\u0430\u0439\u0442\u0435\u0441\u044F \u0434\u043E \u0441\u043F\u0438\u0441\u043A\u0443 \u043E\u0447\u0456\u043A\u0443\u0432\u0430\u043D\u043D\u044F \u0456 \u0434\u0456\u0437\u043D\u0430\u0439\u0442\u0435\u0441\u044F \u043F\u0435\u0440\u0448\u0438\u043C\u0438 \u043F\u0440\u043E \u0437\u0430\u043F\u0443\u0441\u043A!",
+        wl_placeholder: "vash@email.com",
+        wl_submit: "\u041F\u0440\u0438\u0454\u0434\u043D\u0430\u0442\u0438\u0441\u044F",
+        wl_success: "\u2713 \u0412\u0438 \u0443 \u0441\u043F\u0438\u0441\u043A\u0443! \u041C\u0438 \u0434\u0430\u043C\u043E \u0437\u043D\u0430\u0442\u0438."
       },
       cs: {
         meta_title: "Vedic Horoscope — Va\u0161e denn\u00ED v\u00E9dsk\u00E1 moudrost",
@@ -1368,7 +1492,12 @@
         dl_desc: "St\u00E1hn\u011Bte Vedic Horoscope a objevte kosmickou moudrost zapsanou ve va\u0161ich hv\u011Bzd\u00E1ch. Prvn\u00ED v\u00FDklad je zdarma.",
         footer_privacy: "Z\u00E1sady ochrany soukrom\u00ED",
         footer_terms: "Podm\u00EDnky slu\u017Eby",
-        footer_contact: "Kontakt"
+        footer_contact: "Kontakt",
+        wl_title: "Ji\u017E brzy",
+        wl_desc: "Aplikace se pr\u00E1v\u011B testuje. P\u0159ipojte se k \u010Dekac\u00ED listin\u011B a bu\u010Fte prvn\u00ED, kdo se dozv\u00ED o spu\u0161t\u011Bn\u00ED!",
+        wl_placeholder: "vas@email.com",
+        wl_submit: "P\u0159ipojit",
+        wl_success: "\u2713 Jste na seznamu! D\u00E1me v\u00E1m v\u011Bd\u011Bt."
       }
     };
 
@@ -1405,11 +1534,51 @@
         }
       });
 
+      // Update placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (T[lang][key]) el.placeholder = T[lang][key];
+      });
+
       // Update active pill
       document.querySelectorAll('.lang-pill').forEach(p => {
         p.classList.toggle('active', p.getAttribute('data-lang') === lang);
       });
     }
+
+    // ── Waitlist modal ──
+    function openWaitlist() {
+      document.getElementById('waitlistModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeWaitlist() {
+      document.getElementById('waitlistModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function submitWaitlist(e) {
+      e.preventDefault();
+      const form = document.getElementById('waitlistForm');
+      const endpoint = form.getAttribute('action');
+      if (endpoint === 'YOUR_FORMSPREE_ENDPOINT') {
+        // Endpoint not configured yet — just show success
+        form.style.display = 'none';
+        document.getElementById('waitlistSuccess').classList.add('show');
+        return false;
+      }
+      fetch(endpoint, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(r => {
+        form.style.display = 'none';
+        document.getElementById('waitlistSuccess').classList.add('show');
+      }).catch(() => {
+        form.style.display = 'none';
+        document.getElementById('waitlistSuccess').classList.add('show');
+      });
+      return false;
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeWaitlist(); });
 
     // ── Starfield ──
     (function() {
