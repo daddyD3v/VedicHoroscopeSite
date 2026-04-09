@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vedic Horoscope — Your Daily Vedic Wisdom</title>
-  <meta name="description" content="Discover your destiny with AI-powered Vedic astrology. Daily horoscopes, natal charts, and personalized cosmic insights based on ancient Jyotish traditions." />
+  <title data-i18n="meta_title">Vedic Horoscope — Your Daily Vedic Wisdom</title>
+  <meta name="description" data-i18n-attr="content" data-i18n="meta_desc" content="Discover your destiny with AI-powered Vedic astrology. Daily horoscopes, natal charts, and personalized cosmic insights based on ancient Jyotish traditions." />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -456,7 +456,7 @@
       gap: 12px;
     }
     .showcase-list li::before {
-      content: '✦';
+      content: '\2726';
       color: var(--gold);
       font-size: 12px;
     }
@@ -481,8 +481,7 @@
       border-color: var(--gold);
       position: relative;
     }
-    .pricing-card.featured::before {
-      content: 'BEST VALUE';
+    .pricing-badge {
       position: absolute;
       top: -12px;
       left: 50%;
@@ -494,6 +493,7 @@
       letter-spacing: 1px;
       padding: 4px 16px;
       border-radius: 20px;
+      white-space: nowrap;
     }
     .pricing-card:hover { transform: translateY(-4px); }
     .pricing-card h3 {
@@ -523,12 +523,12 @@
       gap: 10px;
     }
     .pricing-features li::before {
-      content: '✓';
+      content: '\2713';
       color: var(--gold);
       font-weight: 700;
     }
     .pricing-features li.disabled { color: var(--text-dim); }
-    .pricing-features li.disabled::before { content: '—'; color: var(--text-dim); font-weight: 400; }
+    .pricing-features li.disabled::before { content: '\2014'; color: var(--text-dim); font-weight: 400; }
 
     /* ── Fortune Card ── */
     .fortune-section {
@@ -569,6 +569,12 @@
       font-weight: 600;
       letter-spacing: 1px;
       transition: 0.3s;
+      cursor: pointer;
+      user-select: none;
+    }
+    .lang-pill:hover {
+      border-color: rgba(232,168,56,0.5);
+      color: var(--cream);
     }
     .lang-pill.active {
       border-color: var(--gold);
@@ -700,14 +706,14 @@
   <nav>
     <div class="container">
       <a href="#" class="nav-brand">
-        <span class="nav-om">&oplus;</span>
+        <span class="nav-om">&#8853;</span>
         <span class="nav-title">Vedic Horoscope</span>
       </a>
       <div class="nav-links" id="navLinks">
-        <a href="#features">Features</a>
-        <a href="#how">How it works</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#download" class="nav-cta">Download</a>
+        <a href="#features" data-i18n="nav_features">Features</a>
+        <a href="#how" data-i18n="nav_how">How it works</a>
+        <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+        <a href="#download" class="nav-cta" data-i18n="nav_download">Download</a>
       </div>
       <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -718,22 +724,22 @@
   <!-- Hero -->
   <section class="hero" id="home">
     <div class="hero-content fade-in">
-      <div class="hero-om">&oplus;</div>
+      <div class="hero-om">&#8853;</div>
       <h1>Vedic Horoscope</h1>
       <div class="divider">
         <span class="divider-line"></span>
         <span class="divider-star">&#10022;</span>
         <span class="divider-line"></span>
       </div>
-      <p class="hero-tagline">Ancient Wisdom, Modern Insight</p>
-      <p class="hero-desc">
+      <p class="hero-tagline" data-i18n="hero_tagline">Ancient Wisdom, Modern Insight</p>
+      <p class="hero-desc" data-i18n="hero_desc">
         Discover your cosmic path with AI-powered Vedic astrology.
         Personalized daily horoscopes and natal charts based on
         Jyotish traditions — crafted uniquely for you.
       </p>
       <div class="hero-buttons">
-        <a href="#download" class="btn-primary">Get Started</a>
-        <a href="#features" class="btn-secondary">Learn More</a>
+        <a href="#download" class="btn-primary" data-i18n="hero_cta">Get Started</a>
+        <a href="#features" class="btn-secondary" data-i18n="hero_learn">Learn More</a>
       </div>
     </div>
   </section>
@@ -743,7 +749,7 @@
     <div class="container">
       <div class="section-header fade-in">
         <span class="section-icon">&#10022;</span>
-        <h2 class="section-title">Features</h2>
+        <h2 class="section-title" data-i18n="feat_title">Features</h2>
         <div class="divider">
           <span class="divider-line"></span>
           <span class="divider-star">&#10022;</span>
@@ -753,33 +759,33 @@
       <div class="features-grid">
         <div class="feature-card fade-in">
           <div class="feature-icon gold">&#9737;</div>
-          <h3>Daily Horoscope</h3>
-          <p>AI-generated readings based on your birth chart, current planetary transits, auspicious hours (muhurta), and a personal daily mantra.</p>
+          <h3 data-i18n="feat_daily_h">Daily Horoscope</h3>
+          <p data-i18n="feat_daily_p">AI-generated readings based on your birth chart, current planetary transits, auspicious hours (muhurta), and a personal daily mantra.</p>
         </div>
         <div class="feature-card fade-in">
           <div class="feature-icon purple">&#9789;</div>
-          <h3>Natal Chart (Kundali)</h3>
-          <p>Complete birth chart analysis including Rashi, Nakshatras, and Dashas — your cosmic blueprint decoded by advanced AI.</p>
+          <h3 data-i18n="feat_natal_h">Natal Chart (Kundali)</h3>
+          <p data-i18n="feat_natal_p">Complete birth chart analysis including Rashi, Nakshatras, and Dashas — your cosmic blueprint decoded by advanced AI.</p>
         </div>
         <div class="feature-card fade-in">
           <div class="feature-icon cyan">&#128302;</div>
-          <h3>Personalization</h3>
-          <p>Contextual insights enriched by your location, weather, moon phase, and calendar — making every reading uniquely yours.</p>
+          <h3 data-i18n="feat_personal_h">Personalization</h3>
+          <p data-i18n="feat_personal_p">Contextual insights enriched by your location, weather, moon phase, and calendar — making every reading uniquely yours.</p>
         </div>
         <div class="feature-card fade-in">
           <div class="feature-icon gold">&#128220;</div>
-          <h3>History</h3>
-          <p>Access your past 30 readings anytime. Track your cosmic journey and see how celestial patterns unfold over time.</p>
+          <h3 data-i18n="feat_history_h">History</h3>
+          <p data-i18n="feat_history_p">Access your past 30 readings anytime. Track your cosmic journey and see how celestial patterns unfold over time.</p>
         </div>
         <div class="feature-card fade-in">
           <div class="feature-icon purple">&#127760;</div>
-          <h3>Multilingual</h3>
-          <p>Available in Polish, English, Ukrainian, and Czech. Your cosmic wisdom in your preferred language.</p>
+          <h3 data-i18n="feat_lang_h">Multilingual</h3>
+          <p data-i18n="feat_lang_p">Available in Polish, English, Ukrainian, and Czech. Your cosmic wisdom in your preferred language.</p>
         </div>
         <div class="feature-card fade-in">
           <div class="feature-icon cyan">&#128276;</div>
-          <h3>Daily Notifications</h3>
-          <p>Start each morning with cosmic guidance. Receive personalized horoscope notifications at your preferred time.</p>
+          <h3 data-i18n="feat_notif_h">Daily Notifications</h3>
+          <p data-i18n="feat_notif_p">Start each morning with cosmic guidance. Receive personalized horoscope notifications at your preferred time.</p>
         </div>
       </div>
     </div>
@@ -792,47 +798,47 @@
         <div class="showcase-phone fade-in">
           <div class="phone-notch"></div>
           <div class="phone-screen">
-            <div class="p-om">&oplus;</div>
+            <div class="p-om">&#8853;</div>
             <div class="p-title">Vedic Horoscope</div>
-            <div class="p-tag">Ancient Wisdom, Modern Insight</div>
+            <div class="p-tag" data-i18n="hero_tagline">Ancient Wisdom, Modern Insight</div>
             <div class="phone-card">
               <div class="phone-card-icon gold-bg">&#9737;</div>
               <div class="phone-card-text">
-                <h4>Daily Horoscope</h4>
-                <p>Your personalized cosmic reading</p>
+                <h4 data-i18n="feat_daily_h">Daily Horoscope</h4>
+                <p data-i18n="phone_daily_sub">Your personalized cosmic reading</p>
               </div>
             </div>
             <div class="phone-card">
               <div class="phone-card-icon purple-bg">&#9789;</div>
               <div class="phone-card-text">
-                <h4>Natal Chart</h4>
-                <p>Complete Kundali analysis</p>
+                <h4 data-i18n="feat_natal_h">Natal Chart</h4>
+                <p data-i18n="phone_natal_sub">Complete Kundali analysis</p>
               </div>
             </div>
           </div>
           <div class="phone-tab-bar">
             <div class="phone-tab active"><span>&#9737;</span>Home</div>
-            <div class="phone-tab inactive"><span>&#128220;</span>History</div>
-            <div class="phone-tab inactive"><span>&#9881;</span>Settings</div>
+            <div class="phone-tab inactive"><span>&#128220;</span><span data-i18n="tab_history">History</span></div>
+            <div class="phone-tab inactive"><span>&#9881;</span><span data-i18n="tab_settings">Settings</span></div>
           </div>
         </div>
         <div class="showcase-info fade-in">
-          <h2>Your Personal Astrologer</h2>
+          <h2 data-i18n="showcase_title">Your Personal Astrologer</h2>
           <div class="divider" style="margin-left:0; max-width:300px;">
             <span class="divider-line"></span>
             <span class="divider-star">&#10022;</span>
             <span class="divider-line"></span>
           </div>
-          <p>Vedic Horoscope combines ancient Jyotish wisdom with the power of artificial intelligence to deliver readings that are deeply personal, contextually aware, and beautifully presented.</p>
+          <p data-i18n="showcase_desc">Vedic Horoscope combines ancient Jyotish wisdom with the power of artificial intelligence to deliver readings that are deeply personal, contextually aware, and beautifully presented.</p>
           <ul class="showcase-list">
-            <li>Readings based on real planetary positions</li>
-            <li>Personalized with your exact birth data</li>
-            <li>Contextual: weather, moon phase, location</li>
-            <li>Beautiful shareable cosmic cards</li>
-            <li>Available in 4 languages</li>
-            <li>Premium & free tiers available</li>
+            <li data-i18n="showcase_li1">Readings based on real planetary positions</li>
+            <li data-i18n="showcase_li2">Personalized with your exact birth data</li>
+            <li data-i18n="showcase_li3">Contextual: weather, moon phase, location</li>
+            <li data-i18n="showcase_li4">Beautiful shareable cosmic cards</li>
+            <li data-i18n="showcase_li5">Available in 4 languages</li>
+            <li data-i18n="showcase_li6">Premium & free tiers available</li>
           </ul>
-          <a href="#download" class="btn-primary">Try It Free</a>
+          <a href="#download" class="btn-primary" data-i18n="showcase_cta">Try It Free</a>
         </div>
       </div>
     </div>
@@ -843,7 +849,7 @@
     <div class="container">
       <div class="section-header fade-in">
         <div class="orbital">
-          <div class="orbital-center">&oplus;</div>
+          <div class="orbital-center">&#8853;</div>
           <div class="orbital-ring">
             <span class="orbital-planet">&#9791;</span>
             <span class="orbital-planet">&#9792;</span>
@@ -851,7 +857,7 @@
             <span class="orbital-planet">&#9795;</span>
           </div>
         </div>
-        <h2 class="section-title">How It Works</h2>
+        <h2 class="section-title" data-i18n="how_title">How It Works</h2>
         <div class="divider">
           <span class="divider-line"></span>
           <span class="divider-star">&#10022;</span>
@@ -861,18 +867,18 @@
       <div class="steps">
         <div class="step fade-in">
           <div class="step-num">1</div>
-          <h3>Enter Your Birth Data</h3>
-          <p>Date, time, and place of birth — the foundation of your Vedic chart.</p>
+          <h3 data-i18n="step1_h">Enter Your Birth Data</h3>
+          <p data-i18n="step1_p">Date, time, and place of birth — the foundation of your Vedic chart.</p>
         </div>
         <div class="step fade-in">
           <div class="step-num">2</div>
-          <h3>AI Analyzes Your Chart</h3>
-          <p>Advanced AI calculates planetary positions, transits, and Vedic aspects.</p>
+          <h3 data-i18n="step2_h">AI Analyzes Your Chart</h3>
+          <p data-i18n="step2_p">Advanced AI calculates planetary positions, transits, and Vedic aspects.</p>
         </div>
         <div class="step fade-in">
           <div class="step-num">3</div>
-          <h3>Receive Your Reading</h3>
-          <p>A personalized, beautifully formatted horoscope — unique to this moment.</p>
+          <h3 data-i18n="step3_h">Receive Your Reading</h3>
+          <p data-i18n="step3_p">A personalized, beautifully formatted horoscope — unique to this moment.</p>
         </div>
       </div>
     </div>
@@ -883,7 +889,7 @@
     <div class="container">
       <div class="fortune-card fade-in">
         <div class="fortune-emoji">&#127834;</div>
-        <p class="fortune-text">
+        <p class="fortune-text" data-i18n="fortune_text">
           "The stars incline, they do not compel. Your birth chart is not a prison — it is a map of possibilities. Use its wisdom to navigate your journey with grace."
         </p>
       </div>
@@ -905,32 +911,33 @@
       <div class="pricing-grid">
         <div class="pricing-card fade-in">
           <h3>Free</h3>
-          <p class="pricing-price">Forever free</p>
+          <p class="pricing-price" data-i18n="price_free_sub">Forever free</p>
           <ul class="pricing-features">
-            <li>4 daily horoscopes / month</li>
-            <li>1 free natal chart reading</li>
-            <li>History access</li>
-            <li>All 4 languages</li>
-            <li class="disabled">Unlimited readings</li>
-            <li class="disabled">Full personalization</li>
+            <li data-i18n="price_f1">4 daily horoscopes / month</li>
+            <li data-i18n="price_f2">1 free natal chart reading</li>
+            <li data-i18n="price_f3">History access</li>
+            <li data-i18n="price_f4">All 4 languages</li>
+            <li class="disabled" data-i18n="price_f5">Unlimited readings</li>
+            <li class="disabled" data-i18n="price_f6">Full personalization</li>
           </ul>
-          <a href="#download" class="btn-secondary">Get Started</a>
+          <a href="#download" class="btn-secondary" data-i18n="hero_cta">Get Started</a>
         </div>
         <div class="pricing-card featured fade-in">
+          <span class="pricing-badge" data-i18n="price_badge">BEST VALUE</span>
           <h3>Premium</h3>
-          <p class="pricing-price">Unlock your full cosmic potential</p>
+          <p class="pricing-price" data-i18n="price_prem_sub">Unlock your full cosmic potential</p>
           <ul class="pricing-features">
-            <li>Unlimited daily horoscopes</li>
-            <li>Unlimited natal chart readings</li>
-            <li>Full history access</li>
-            <li>All 4 languages</li>
-            <li>Unlimited readings</li>
-            <li>Full contextual personalization</li>
+            <li data-i18n="price_p1">Unlimited daily horoscopes</li>
+            <li data-i18n="price_p2">Unlimited natal chart readings</li>
+            <li data-i18n="price_p3">Full history access</li>
+            <li data-i18n="price_f4">All 4 languages</li>
+            <li data-i18n="price_p5">Unlimited readings</li>
+            <li data-i18n="price_p6">Full contextual personalization</li>
           </ul>
-          <a href="#download" class="btn-primary" style="width:100%;text-align:center;">Go Premium</a>
+          <a href="#download" class="btn-primary" style="width:100%;text-align:center;" data-i18n="price_go_prem">Go Premium</a>
         </div>
       </div>
-      <p style="text-align:center; margin-top:20px; font-size:13px; color:var(--text-dim);">Cancel anytime. Prices set in-app via App Store / Google Play.</p>
+      <p style="text-align:center; margin-top:20px; font-size:13px; color:var(--text-dim);" data-i18n="price_cancel">Cancel anytime. Prices set in-app via App Store / Google Play.</p>
     </div>
   </section>
 
@@ -939,19 +946,19 @@
     <div class="container">
       <div class="section-header fade-in">
         <span class="section-icon">&#127760;</span>
-        <h2 class="section-title">Your Language</h2>
+        <h2 class="section-title" data-i18n="lang_title">Your Language</h2>
         <div class="divider">
           <span class="divider-line"></span>
           <span class="divider-star">&#10022;</span>
           <span class="divider-line"></span>
         </div>
-        <p style="color:var(--text); max-width:500px; margin:0 auto;">Available in 4 languages with automatic detection based on your device settings.</p>
+        <p style="color:var(--text); max-width:500px; margin:0 auto;" data-i18n="lang_desc">Available in 4 languages with automatic detection based on your device settings.</p>
       </div>
       <div class="lang-pills fade-in">
-        <span class="lang-pill active">PL</span>
-        <span class="lang-pill">EN</span>
-        <span class="lang-pill">UA</span>
-        <span class="lang-pill">CS</span>
+        <span class="lang-pill" data-lang="pl" onclick="setLang('pl')">PL</span>
+        <span class="lang-pill" data-lang="en" onclick="setLang('en')">EN</span>
+        <span class="lang-pill" data-lang="ua" onclick="setLang('ua')">UA</span>
+        <span class="lang-pill" data-lang="cs" onclick="setLang('cs')">CS</span>
       </div>
     </div>
   </section>
@@ -960,14 +967,14 @@
   <section id="download" style="padding-bottom: 100px;">
     <div class="container" style="text-align:center;">
       <div class="fade-in">
-        <div class="hero-om" style="font-size:56px; margin-bottom:20px;">&oplus;</div>
-        <h2 class="section-title" style="margin-bottom:12px;">Begin Your Journey</h2>
+        <div class="hero-om" style="font-size:56px; margin-bottom:20px;">&#8853;</div>
+        <h2 class="section-title" style="margin-bottom:12px;" data-i18n="dl_title">Begin Your Journey</h2>
         <div class="divider">
           <span class="divider-line"></span>
           <span class="divider-star">&#10022;</span>
           <span class="divider-line"></span>
         </div>
-        <p style="font-size:16px; line-height:1.8; color:var(--text); max-width:500px; margin:24px auto 40px;">Download Vedic Horoscope and discover the cosmic wisdom written in your stars. Your first reading is free.</p>
+        <p style="font-size:16px; line-height:1.8; color:var(--text); max-width:500px; margin:24px auto 40px;" data-i18n="dl_desc">Download Vedic Horoscope and discover the cosmic wisdom written in your stars. Your first reading is free.</p>
         <div class="hero-buttons">
           <a href="#" class="btn-primary">&#63743; App Store</a>
           <a href="#" class="btn-primary" style="background:var(--cream);">&#9654; Google Play</a>
@@ -979,17 +986,336 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <div class="footer-om">&oplus;</div>
+      <div class="footer-om">&#8853;</div>
       <div class="footer-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Contact</a>
+        <a href="#" data-i18n="footer_privacy">Privacy Policy</a>
+        <a href="#" data-i18n="footer_terms">Terms of Service</a>
+        <a href="#" data-i18n="footer_contact">Contact</a>
       </div>
       <p class="footer-copy">&copy; 2026 Vedic Horoscope. All rights reserved.</p>
     </div>
   </footer>
 
   <script>
+    // ── Translations ──
+    const T = {
+      en: {
+        meta_title: "Vedic Horoscope — Your Daily Vedic Wisdom",
+        meta_desc: "Discover your destiny with AI-powered Vedic astrology. Daily horoscopes, natal charts, and personalized cosmic insights based on ancient Jyotish traditions.",
+        nav_features: "Features",
+        nav_how: "How it works",
+        nav_pricing: "Pricing",
+        nav_download: "Download",
+        hero_tagline: "Ancient Wisdom, Modern Insight",
+        hero_desc: "Discover your cosmic path with AI-powered Vedic astrology. Personalized daily horoscopes and natal charts based on Jyotish traditions — crafted uniquely for you.",
+        hero_cta: "Get Started",
+        hero_learn: "Learn More",
+        feat_title: "Features",
+        feat_daily_h: "Daily Horoscope",
+        feat_daily_p: "AI-generated readings based on your birth chart, current planetary transits, auspicious hours (muhurta), and a personal daily mantra.",
+        feat_natal_h: "Natal Chart (Kundali)",
+        feat_natal_p: "Complete birth chart analysis including Rashi, Nakshatras, and Dashas — your cosmic blueprint decoded by advanced AI.",
+        feat_personal_h: "Personalization",
+        feat_personal_p: "Contextual insights enriched by your location, weather, moon phase, and calendar — making every reading uniquely yours.",
+        feat_history_h: "History",
+        feat_history_p: "Access your past 30 readings anytime. Track your cosmic journey and see how celestial patterns unfold over time.",
+        feat_lang_h: "Multilingual",
+        feat_lang_p: "Available in Polish, English, Ukrainian, and Czech. Your cosmic wisdom in your preferred language.",
+        feat_notif_h: "Daily Notifications",
+        feat_notif_p: "Start each morning with cosmic guidance. Receive personalized horoscope notifications at your preferred time.",
+        phone_daily_sub: "Your personalized cosmic reading",
+        phone_natal_sub: "Complete Kundali analysis",
+        tab_history: "History",
+        tab_settings: "Settings",
+        showcase_title: "Your Personal Astrologer",
+        showcase_desc: "Vedic Horoscope combines ancient Jyotish wisdom with the power of artificial intelligence to deliver readings that are deeply personal, contextually aware, and beautifully presented.",
+        showcase_li1: "Readings based on real planetary positions",
+        showcase_li2: "Personalized with your exact birth data",
+        showcase_li3: "Contextual: weather, moon phase, location",
+        showcase_li4: "Beautiful shareable cosmic cards",
+        showcase_li5: "Available in 4 languages",
+        showcase_li6: "Premium & free tiers available",
+        showcase_cta: "Try It Free",
+        how_title: "How It Works",
+        step1_h: "Enter Your Birth Data",
+        step1_p: "Date, time, and place of birth — the foundation of your Vedic chart.",
+        step2_h: "AI Analyzes Your Chart",
+        step2_p: "Advanced AI calculates planetary positions, transits, and Vedic aspects.",
+        step3_h: "Receive Your Reading",
+        step3_p: "A personalized, beautifully formatted horoscope — unique to this moment.",
+        fortune_text: "\u201CThe stars incline, they do not compel. Your birth chart is not a prison — it is a map of possibilities. Use its wisdom to navigate your journey with grace.\u201D",
+        price_free_sub: "Forever free",
+        price_prem_sub: "Unlock your full cosmic potential",
+        price_badge: "BEST VALUE",
+        price_f1: "4 daily horoscopes / month",
+        price_f2: "1 free natal chart reading",
+        price_f3: "History access",
+        price_f4: "All 4 languages",
+        price_f5: "Unlimited readings",
+        price_f6: "Full personalization",
+        price_p1: "Unlimited daily horoscopes",
+        price_p2: "Unlimited natal chart readings",
+        price_p3: "Full history access",
+        price_p5: "Unlimited readings",
+        price_p6: "Full contextual personalization",
+        price_go_prem: "Go Premium",
+        price_cancel: "Cancel anytime. Prices set in-app via App Store / Google Play.",
+        lang_title: "Your Language",
+        lang_desc: "Available in 4 languages with automatic detection based on your device settings.",
+        dl_title: "Begin Your Journey",
+        dl_desc: "Download Vedic Horoscope and discover the cosmic wisdom written in your stars. Your first reading is free.",
+        footer_privacy: "Privacy Policy",
+        footer_terms: "Terms of Service",
+        footer_contact: "Contact"
+      },
+      pl: {
+        meta_title: "Vedic Horoscope — Twoja codzienna wedyjska m\u0105dro\u015B\u0107",
+        meta_desc: "Odkryj swoje przeznaczenie z astrologi\u0105 wedyjsk\u0105 wspieran\u0105 przez AI. Codzienne horoskopy, karty natalne i spersonalizowane kosmiczne wgl\u0105dy oparte na tradycji Jyotish.",
+        nav_features: "Funkcje",
+        nav_how: "Jak to dzia\u0142a",
+        nav_pricing: "Cennik",
+        nav_download: "Pobierz",
+        hero_tagline: "Staro\u017Cytna m\u0105dro\u015B\u0107, nowoczesna wizja",
+        hero_desc: "Odkryj swoj\u0105 kosmiczn\u0105 \u015Bcie\u017Ck\u0119 z astrologi\u0105 wedyjsk\u0105 wspieran\u0105 przez AI. Spersonalizowane codzienne horoskopy i karty natalne oparte na tradycji Jyotish — stworzone unikatowo dla Ciebie.",
+        hero_cta: "Zacznij",
+        hero_learn: "Dowiedz si\u0119 wi\u0119cej",
+        feat_title: "Funkcje",
+        feat_daily_h: "Codzienny horoskop",
+        feat_daily_p: "Odczyty generowane przez AI na podstawie Twojej karty urodzeniowej, bie\u017C\u0105cych tranzyt\u00F3w planetarnych, pomy\u015Blnych godzin (muhurta) i osobistej codziennej mantry.",
+        feat_natal_h: "Karta natalna (Kundali)",
+        feat_natal_p: "Pe\u0142na analiza karty urodzeniowej, w tym Rashi, Nakshatry i Dashy — Tw\u00F3j kosmiczny plan zdekodowany przez zaawansowan\u0105 AI.",
+        feat_personal_h: "Personalizacja",
+        feat_personal_p: "Kontekstowe wgl\u0105dy wzbogacone o Twoj\u0105 lokalizacj\u0119, pogod\u0119, faz\u0119 ksi\u0119\u017Cyca i kalendarz — ka\u017Cdy odczyt jest unikatowy.",
+        feat_history_h: "Historia",
+        feat_history_p: "Dost\u0119p do 30 ostatnich odczyt\u00F3w w ka\u017Cdej chwili. \u015Aled\u017A swoj\u0105 kosmiczn\u0105 podr\u00F3\u017C i obserwuj, jak wzorce niebieskie rozwijaj\u0105 si\u0119 w czasie.",
+        feat_lang_h: "Wieloj\u0119zyczno\u015B\u0107",
+        feat_lang_p: "Dost\u0119pna w j\u0119zyku polskim, angielskim, ukrai\u0144skim i czeskim. Kosmiczna m\u0105dro\u015B\u0107 w Twoim j\u0119zyku.",
+        feat_notif_h: "Codzienne powiadomienia",
+        feat_notif_p: "Zacznij ka\u017Cdy poranek od kosmicznej wskaz\u00F3wki. Otrzymuj spersonalizowane powiadomienia o horoskopie o preferowanej porze.",
+        phone_daily_sub: "Tw\u00F3j spersonalizowany odczyt kosmiczny",
+        phone_natal_sub: "Pe\u0142na analiza Kundali",
+        tab_history: "Historia",
+        tab_settings: "Ustawienia",
+        showcase_title: "Tw\u00F3j osobisty astrolog",
+        showcase_desc: "Vedic Horoscope \u0142\u0105czy staro\u017Cytn\u0105 m\u0105dro\u015B\u0107 Jyotish z moc\u0105 sztucznej inteligencji, dostarczaj\u0105c odczyty g\u0142\u0119boko osobiste, kontekstowe i pi\u0119knie prezentowane.",
+        showcase_li1: "Odczyty oparte na realnych pozycjach planet",
+        showcase_li2: "Spersonalizowane na podstawie Twoich danych urodzeniowych",
+        showcase_li3: "Kontekstowe: pogoda, faza ksi\u0119\u017Cyca, lokalizacja",
+        showcase_li4: "Pi\u0119kne, udost\u0119pnialne karty kosmiczne",
+        showcase_li5: "Dost\u0119pna w 4 j\u0119zykach",
+        showcase_li6: "Dost\u0119pna wersja Premium i darmowa",
+        showcase_cta: "Wypr\u00F3buj za darmo",
+        how_title: "Jak to dzia\u0142a",
+        step1_h: "Wprowad\u017A dane urodzeniowe",
+        step1_p: "Data, godzina i miejsce urodzenia — fundament Twojej wedyjskiej karty.",
+        step2_h: "AI analizuje Twoj\u0105 kart\u0119",
+        step2_p: "Zaawansowana AI oblicza pozycje planet, tranzyty i aspekty wedyjskie.",
+        step3_h: "Odbierz sw\u00F3j odczyt",
+        step3_p: "Spersonalizowany, pi\u0119knie sformatowany horoskop — unikatowy dla tego momentu.",
+        fortune_text: "\u201EGwiazdy sk\u0142aniaj\u0105, nie zmuszaj\u0105. Twoja karta urodzeniowa to nie wi\u0119zienie — to mapa mo\u017Cliwo\u015Bci. Wykorzystaj jej m\u0105dro\u015B\u0107, by nawigowa\u0107 swoj\u0105 podr\u00F3\u017C z gracj\u0105.\u201D",
+        price_free_sub: "Na zawsze za darmo",
+        price_prem_sub: "Odblokuj pe\u0142ny kosmiczny potencja\u0142",
+        price_badge: "NAJLEPSZA OFERTA",
+        price_f1: "4 dzienne horoskopy / miesi\u0105c",
+        price_f2: "1 darmowy odczyt karty natalnej",
+        price_f3: "Dost\u0119p do historii",
+        price_f4: "Wszystkie 4 j\u0119zyki",
+        price_f5: "Nieograniczone odczyty",
+        price_f6: "Pe\u0142na personalizacja",
+        price_p1: "Nieograniczone codzienne horoskopy",
+        price_p2: "Nieograniczone odczyty kart natalnych",
+        price_p3: "Pe\u0142ny dost\u0119p do historii",
+        price_p5: "Nieograniczone odczyty",
+        price_p6: "Pe\u0142na personalizacja kontekstowa",
+        price_go_prem: "Przejd\u017A na Premium",
+        price_cancel: "Anuluj w dowolnym momencie. Ceny ustawiane w aplikacji przez App Store / Google Play.",
+        lang_title: "Tw\u00F3j j\u0119zyk",
+        lang_desc: "Dost\u0119pna w 4 j\u0119zykach z automatycznym wykrywaniem na podstawie ustawie\u0144 urz\u0105dzenia.",
+        dl_title: "Rozpocznij swoj\u0105 podr\u00F3\u017C",
+        dl_desc: "Pobierz Vedic Horoscope i odkryj kosmiczn\u0105 m\u0105dro\u015B\u0107 zapisan\u0105 w Twoich gwiazdach. Pierwszy odczyt jest darmowy.",
+        footer_privacy: "Polityka prywatno\u015Bci",
+        footer_terms: "Regulamin",
+        footer_contact: "Kontakt"
+      },
+      ua: {
+        meta_title: "Vedic Horoscope — \u0412\u0430\u0448\u0430 \u0449\u043E\u0434\u0435\u043D\u043D\u0430 \u0432\u0435\u0434\u0438\u0447\u043D\u0430 \u043C\u0443\u0434\u0440\u0456\u0441\u0442\u044C",
+        meta_desc: "\u0412\u0456\u0434\u043A\u0440\u0438\u0439\u0442\u0435 \u0441\u0432\u043E\u044E \u0434\u043E\u043B\u044E \u0437 \u0432\u0435\u0434\u0438\u0447\u043D\u043E\u044E \u0430\u0441\u0442\u0440\u043E\u043B\u043E\u0433\u0456\u0454\u044E \u043D\u0430 \u0431\u0430\u0437\u0456 AI. \u0429\u043E\u0434\u0435\u043D\u043D\u0456 \u0433\u043E\u0440\u043E\u0441\u043A\u043E\u043F\u0438, \u043D\u0430\u0442\u0430\u043B\u044C\u043D\u0456 \u043A\u0430\u0440\u0442\u0438 \u0442\u0430 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0456\u0437\u043E\u0432\u0430\u043D\u0456 \u043A\u043E\u0441\u043C\u0456\u0447\u043D\u0456 \u043F\u043E\u0440\u0430\u0434\u0438 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0456 \u0442\u0440\u0430\u0434\u0438\u0446\u0456\u0439 \u0414\u0436\u044C\u043E\u0442\u0456\u0448.",
+        nav_features: "\u0424\u0443\u043D\u043A\u0446\u0456\u0457",
+        nav_how: "\u042F\u043A \u0446\u0435 \u043F\u0440\u0430\u0446\u044E\u0454",
+        nav_pricing: "\u0426\u0456\u043D\u0438",
+        nav_download: "\u0417\u0430\u0432\u0430\u043D\u0442\u0430\u0436\u0438\u0442\u0438",
+        hero_tagline: "\u0414\u0430\u0432\u043D\u044F \u043C\u0443\u0434\u0440\u0456\u0441\u0442\u044C, \u0441\u0443\u0447\u0430\u0441\u043D\u0435 \u0431\u0430\u0447\u0435\u043D\u043D\u044F",
+        hero_desc: "\u0412\u0456\u0434\u043A\u0440\u0438\u0439\u0442\u0435 \u0441\u0432\u0456\u0439 \u043A\u043E\u0441\u043C\u0456\u0447\u043D\u0438\u0439 \u0448\u043B\u044F\u0445 \u0437 \u0432\u0435\u0434\u0438\u0447\u043D\u043E\u044E \u0430\u0441\u0442\u0440\u043E\u043B\u043E\u0433\u0456\u0454\u044E \u043D\u0430 \u0431\u0430\u0437\u0456 AI. \u041F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0456\u0437\u043E\u0432\u0430\u043D\u0456 \u0449\u043E\u0434\u0435\u043D\u043D\u0456 \u0433\u043E\u0440\u043E\u0441\u043A\u043E\u043F\u0438 \u0442\u0430 \u043D\u0430\u0442\u0430\u043B\u044C\u043D\u0456 \u043A\u0430\u0440\u0442\u0438 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0456 \u0442\u0440\u0430\u0434\u0438\u0446\u0456\u0439 \u0414\u0436\u044C\u043E\u0442\u0456\u0448 — \u0441\u0442\u0432\u043E\u0440\u0435\u043D\u0456 \u0443\u043D\u0456\u043A\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u0432\u0430\u0441.",
+        hero_cta: "\u041F\u043E\u0447\u0430\u0442\u0438",
+        hero_learn: "\u0414\u0456\u0437\u043D\u0430\u0442\u0438\u0441\u044F \u0431\u0456\u043B\u044C\u0448\u0435",
+        feat_title: "\u0424\u0443\u043D\u043A\u0446\u0456\u0457",
+        feat_daily_h: "\u0429\u043E\u0434\u0435\u043D\u043D\u0438\u0439 \u0433\u043E\u0440\u043E\u0441\u043A\u043E\u043F",
+        feat_daily_p: "\u041E\u0434\u0447\u0438\u0442\u0438, \u0437\u0433\u0435\u043D\u0435\u0440\u043E\u0432\u0430\u043D\u0456 AI \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0456 \u0432\u0430\u0448\u043E\u0457 \u043A\u0430\u0440\u0442\u0438 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F, \u043F\u043E\u0442\u043E\u0447\u043D\u0438\u0445 \u043F\u043B\u0430\u043D\u0435\u0442\u0430\u0440\u043D\u0438\u0445 \u0442\u0440\u0430\u043D\u0437\u0438\u0442\u0456\u0432, \u0441\u043F\u0440\u0438\u044F\u0442\u043B\u0438\u0432\u0438\u0445 \u0433\u043E\u0434\u0438\u043D (\u043C\u0443\u0445\u0443\u0440\u0442\u0430) \u0442\u0430 \u043E\u0441\u043E\u0431\u0438\u0441\u0442\u043E\u0457 \u0449\u043E\u0434\u0435\u043D\u043D\u043E\u0457 \u043C\u0430\u043D\u0442\u0440\u0438.",
+        feat_natal_h: "\u041D\u0430\u0442\u0430\u043B\u044C\u043D\u0430 \u043A\u0430\u0440\u0442\u0430 (\u041A\u0443\u043D\u0434\u0430\u043B\u0456)",
+        feat_natal_p: "\u041F\u043E\u0432\u043D\u0438\u0439 \u0430\u043D\u0430\u043B\u0456\u0437 \u043A\u0430\u0440\u0442\u0438 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F, \u0432\u043A\u043B\u044E\u0447\u0430\u044E\u0447\u0438 \u0420\u0430\u0448\u0456, \u041D\u0430\u043A\u0448\u0430\u0442\u0440\u0438 \u0442\u0430 \u0414\u0430\u0448\u0456 — \u0432\u0430\u0448 \u043A\u043E\u0441\u043C\u0456\u0447\u043D\u0438\u0439 \u043F\u043B\u0430\u043D, \u0440\u043E\u0437\u0448\u0438\u0444\u0440\u043E\u0432\u0430\u043D\u0438\u0439 \u043F\u0440\u043E\u0434\u0432\u0438\u043D\u0443\u0442\u0438\u043C AI.",
+        feat_personal_h: "\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0456\u0437\u0430\u0446\u0456\u044F",
+        feat_personal_p: "\u041A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u0456 \u043F\u043E\u0440\u0430\u0434\u0438, \u0437\u0431\u0430\u0433\u0430\u0447\u0435\u043D\u0456 \u0432\u0430\u0448\u043E\u044E \u043B\u043E\u043A\u0430\u0446\u0456\u0454\u044E, \u043F\u043E\u0433\u043E\u0434\u043E\u044E, \u0444\u0430\u0437\u043E\u044E \u043C\u0456\u0441\u044F\u0446\u044F \u0442\u0430 \u043A\u0430\u043B\u0435\u043D\u0434\u0430\u0440\u0435\u043C — \u043A\u043E\u0436\u043D\u0438\u0439 \u043E\u0434\u0447\u0438\u0442 \u0443\u043D\u0456\u043A\u0430\u043B\u044C\u043D\u0438\u0439.",
+        feat_history_h: "\u0406\u0441\u0442\u043E\u0440\u0456\u044F",
+        feat_history_p: "\u0414\u043E\u0441\u0442\u0443\u043F \u0434\u043E 30 \u043E\u0441\u0442\u0430\u043D\u043D\u0456\u0445 \u043E\u0434\u0447\u0438\u0442\u0456\u0432 \u0443 \u0431\u0443\u0434\u044C-\u044F\u043A\u0438\u0439 \u0447\u0430\u0441. \u0421\u0442\u0435\u0436\u0442\u0435 \u0437\u0430 \u0441\u0432\u043E\u0454\u044E \u043A\u043E\u0441\u043C\u0456\u0447\u043D\u043E\u044E \u043F\u043E\u0434\u043E\u0440\u043E\u0436\u0436\u044E \u0442\u0430 \u0441\u043F\u043E\u0441\u0442\u0435\u0440\u0456\u0433\u0430\u0439\u0442\u0435, \u044F\u043A \u043D\u0435\u0431\u0435\u0441\u043D\u0456 \u0432\u0437\u043E\u0440\u0438 \u0440\u043E\u0437\u0433\u043E\u0440\u0442\u0430\u044E\u0442\u044C\u0441\u044F \u0437 \u0447\u0430\u0441\u043E\u043C.",
+        feat_lang_h: "\u0411\u0430\u0433\u0430\u0442\u043E\u043C\u043E\u0432\u043D\u0456\u0441\u0442\u044C",
+        feat_lang_p: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u0430 \u043F\u043E\u043B\u044C\u0441\u044C\u043A\u043E\u044E, \u0430\u043D\u0433\u043B\u0456\u0439\u0441\u044C\u043A\u043E\u044E, \u0443\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u043E\u044E \u0442\u0430 \u0447\u0435\u0441\u044C\u043A\u043E\u044E. \u041A\u043E\u0441\u043C\u0456\u0447\u043D\u0430 \u043C\u0443\u0434\u0440\u0456\u0441\u0442\u044C \u0432\u0430\u0448\u043E\u044E \u043C\u043E\u0432\u043E\u044E.",
+        feat_notif_h: "\u0429\u043E\u0434\u0435\u043D\u043D\u0456 \u0441\u043F\u043E\u0432\u0456\u0449\u0435\u043D\u043D\u044F",
+        feat_notif_p: "\u041F\u043E\u0447\u0438\u043D\u0430\u0439\u0442\u0435 \u043A\u043E\u0436\u043D\u0438\u0439 \u0440\u0430\u043D\u043E\u043A \u0437 \u043A\u043E\u0441\u043C\u0456\u0447\u043D\u043E\u044E \u043F\u043E\u0440\u0430\u0434\u043E\u044E. \u041E\u0442\u0440\u0438\u043C\u0443\u0439\u0442\u0435 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0456\u0437\u043E\u0432\u0430\u043D\u0456 \u0441\u043F\u043E\u0432\u0456\u0449\u0435\u043D\u043D\u044F \u043F\u0440\u043E \u0433\u043E\u0440\u043E\u0441\u043A\u043E\u043F \u0443 \u0437\u0440\u0443\u0447\u043D\u0438\u0439 \u0434\u043B\u044F \u0432\u0430\u0441 \u0447\u0430\u0441.",
+        phone_daily_sub: "\u0412\u0430\u0448 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0456\u0437\u043E\u0432\u0430\u043D\u0438\u0439 \u043A\u043E\u0441\u043C\u0456\u0447\u043D\u0438\u0439 \u043E\u0434\u0447\u0438\u0442",
+        phone_natal_sub: "\u041F\u043E\u0432\u043D\u0438\u0439 \u0430\u043D\u0430\u043B\u0456\u0437 \u041A\u0443\u043D\u0434\u0430\u043B\u0456",
+        tab_history: "\u0406\u0441\u0442\u043E\u0440\u0456\u044F",
+        tab_settings: "\u041D\u0430\u043B\u0430\u0448\u0442\u0443\u0432\u0430\u043D\u043D\u044F",
+        showcase_title: "\u0412\u0430\u0448 \u043E\u0441\u043E\u0431\u0438\u0441\u0442\u0438\u0439 \u0430\u0441\u0442\u0440\u043E\u043B\u043E\u0433",
+        showcase_desc: "Vedic Horoscope \u043F\u043E\u0454\u0434\u043D\u0443\u0454 \u0434\u0430\u0432\u043D\u044E \u043C\u0443\u0434\u0440\u0456\u0441\u0442\u044C \u0414\u0436\u044C\u043E\u0442\u0456\u0448 \u0437 \u043F\u043E\u0442\u0443\u0436\u043D\u0456\u0441\u0442\u044E \u0448\u0442\u0443\u0447\u043D\u043E\u0433\u043E \u0456\u043D\u0442\u0435\u043B\u0435\u043A\u0442\u0443, \u0449\u043E\u0431 \u043D\u0430\u0434\u0430\u0432\u0430\u0442\u0438 \u0433\u043B\u0438\u0431\u043E\u043A\u043E \u043E\u0441\u043E\u0431\u0438\u0441\u0442\u0456, \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u0456 \u0442\u0430 \u043A\u0440\u0430\u0441\u0438\u0432\u043E \u043E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0456 \u043E\u0434\u0447\u0438\u0442\u0438.",
+        showcase_li1: "\u041E\u0434\u0447\u0438\u0442\u0438 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0456 \u0440\u0435\u0430\u043B\u044C\u043D\u0438\u0445 \u043F\u043E\u0437\u0438\u0446\u0456\u0439 \u043F\u043B\u0430\u043D\u0435\u0442",
+        showcase_li2: "\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0456\u0437\u043E\u0432\u0430\u043D\u0456 \u0437\u0430 \u0432\u0430\u0448\u0438\u043C\u0438 \u0434\u0430\u043D\u0438\u043C\u0438 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F",
+        showcase_li3: "\u041A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u0456: \u043F\u043E\u0433\u043E\u0434\u0430, \u0444\u0430\u0437\u0430 \u043C\u0456\u0441\u044F\u0446\u044F, \u043B\u043E\u043A\u0430\u0446\u0456\u044F",
+        showcase_li4: "\u041A\u0440\u0430\u0441\u0438\u0432\u0456 \u043A\u043E\u0441\u043C\u0456\u0447\u043D\u0456 \u043A\u0430\u0440\u0442\u043A\u0438 \u0434\u043B\u044F \u043F\u043E\u0448\u0438\u0440\u0435\u043D\u043D\u044F",
+        showcase_li5: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u0430 4 \u043C\u043E\u0432\u0430\u043C\u0438",
+        showcase_li6: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u0456 Premium \u0442\u0430 \u0431\u0435\u0437\u043A\u043E\u0448\u0442\u043E\u0432\u043D\u0430 \u0432\u0435\u0440\u0441\u0456\u0457",
+        showcase_cta: "\u0421\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u0431\u0435\u0437\u043A\u043E\u0448\u0442\u043E\u0432\u043D\u043E",
+        how_title: "\u042F\u043A \u0446\u0435 \u043F\u0440\u0430\u0446\u044E\u0454",
+        step1_h: "\u0412\u0432\u0435\u0434\u0456\u0442\u044C \u0434\u0430\u043D\u0456 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F",
+        step1_p: "\u0414\u0430\u0442\u0430, \u0447\u0430\u0441 \u0442\u0430 \u043C\u0456\u0441\u0446\u0435 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F — \u043E\u0441\u043D\u043E\u0432\u0430 \u0432\u0430\u0448\u043E\u0457 \u0432\u0435\u0434\u0438\u0447\u043D\u043E\u0457 \u043A\u0430\u0440\u0442\u0438.",
+        step2_h: "AI \u0430\u043D\u0430\u043B\u0456\u0437\u0443\u0454 \u0432\u0430\u0448\u0443 \u043A\u0430\u0440\u0442\u0443",
+        step2_p: "\u041F\u0440\u043E\u0434\u0432\u0438\u043D\u0443\u0442\u0438\u0439 AI \u0440\u043E\u0437\u0440\u0430\u0445\u043E\u0432\u0443\u0454 \u043F\u043E\u0437\u0438\u0446\u0456\u0457 \u043F\u043B\u0430\u043D\u0435\u0442, \u0442\u0440\u0430\u043D\u0437\u0438\u0442\u0438 \u0442\u0430 \u0432\u0435\u0434\u0438\u0447\u043D\u0456 \u0430\u0441\u043F\u0435\u043A\u0442\u0438.",
+        step3_h: "\u041E\u0442\u0440\u0438\u043C\u0430\u0439\u0442\u0435 \u043E\u0434\u0447\u0438\u0442",
+        step3_p: "\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0456\u0437\u043E\u0432\u0430\u043D\u0438\u0439, \u043A\u0440\u0430\u0441\u0438\u0432\u043E \u043E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0439 \u0433\u043E\u0440\u043E\u0441\u043A\u043E\u043F — \u0443\u043D\u0456\u043A\u0430\u043B\u044C\u043D\u0438\u0439 \u0434\u043B\u044F \u0446\u044C\u043E\u0433\u043E \u043C\u043E\u043C\u0435\u043D\u0442\u0443.",
+        fortune_text: "\u00AB\u0417\u0456\u0440\u043A\u0438 \u0441\u0445\u0438\u043B\u044F\u044E\u0442\u044C, \u0430\u043B\u0435 \u043D\u0435 \u0437\u043C\u0443\u0448\u0443\u044E\u0442\u044C. \u0412\u0430\u0448\u0430 \u043A\u0430\u0440\u0442\u0430 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F — \u0446\u0435 \u043D\u0435 \u0432'\u044F\u0437\u043D\u0438\u0446\u044F, \u0430 \u043C\u0430\u043F\u0430 \u043C\u043E\u0436\u043B\u0438\u0432\u043E\u0441\u0442\u0435\u0439. \u0412\u0438\u043A\u043E\u0440\u0438\u0441\u0442\u043E\u0432\u0443\u0439\u0442\u0435 \u0457\u0457 \u043C\u0443\u0434\u0440\u0456\u0441\u0442\u044C, \u0449\u043E\u0431 \u043F\u0440\u043E\u0439\u0442\u0438 \u0441\u0432\u043E\u044E \u043F\u043E\u0434\u043E\u0440\u043E\u0436 \u0437 \u0433\u0440\u0430\u0446\u0456\u0454\u044E.\u00BB",
+        price_free_sub: "\u041D\u0430\u0437\u0430\u0432\u0436\u0434\u0438 \u0431\u0435\u0437\u043A\u043E\u0448\u0442\u043E\u0432\u043D\u043E",
+        price_prem_sub: "\u0420\u043E\u0437\u0431\u043B\u043E\u043A\u0443\u0439\u0442\u0435 \u043F\u043E\u0432\u043D\u0438\u0439 \u043A\u043E\u0441\u043C\u0456\u0447\u043D\u0438\u0439 \u043F\u043E\u0442\u0435\u043D\u0446\u0456\u0430\u043B",
+        price_badge: "\u041D\u0410\u0419\u041A\u0420\u0410\u0429\u0410 \u041F\u0420\u041E\u041F\u041E\u0417\u0418\u0426\u0406\u042F",
+        price_f1: "4 \u0449\u043E\u0434\u0435\u043D\u043D\u0456 \u0433\u043E\u0440\u043E\u0441\u043A\u043E\u043F\u0438 / \u043C\u0456\u0441\u044F\u0446\u044C",
+        price_f2: "1 \u0431\u0435\u0437\u043A\u043E\u0448\u0442\u043E\u0432\u043D\u0430 \u043D\u0430\u0442\u0430\u043B\u044C\u043D\u0430 \u043A\u0430\u0440\u0442\u0430",
+        price_f3: "\u0414\u043E\u0441\u0442\u0443\u043F \u0434\u043E \u0456\u0441\u0442\u043E\u0440\u0456\u0457",
+        price_f4: "\u0412\u0441\u0456 4 \u043C\u043E\u0432\u0438",
+        price_f5: "\u041D\u0435\u043E\u0431\u043C\u0435\u0436\u0435\u043D\u0456 \u043E\u0434\u0447\u0438\u0442\u0438",
+        price_f6: "\u041F\u043E\u0432\u043D\u0430 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0456\u0437\u0430\u0446\u0456\u044F",
+        price_p1: "\u041D\u0435\u043E\u0431\u043C\u0435\u0436\u0435\u043D\u0456 \u0449\u043E\u0434\u0435\u043D\u043D\u0456 \u0433\u043E\u0440\u043E\u0441\u043A\u043E\u043F\u0438",
+        price_p2: "\u041D\u0435\u043E\u0431\u043C\u0435\u0436\u0435\u043D\u0456 \u043D\u0430\u0442\u0430\u043B\u044C\u043D\u0456 \u043A\u0430\u0440\u0442\u0438",
+        price_p3: "\u041F\u043E\u0432\u043D\u0438\u0439 \u0434\u043E\u0441\u0442\u0443\u043F \u0434\u043E \u0456\u0441\u0442\u043E\u0440\u0456\u0457",
+        price_p5: "\u041D\u0435\u043E\u0431\u043C\u0435\u0436\u0435\u043D\u0456 \u043E\u0434\u0447\u0438\u0442\u0438",
+        price_p6: "\u041F\u043E\u0432\u043D\u0430 \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u0430 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0456\u0437\u0430\u0446\u0456\u044F",
+        price_go_prem: "\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043D\u0430 Premium",
+        price_cancel: "\u0421\u043A\u0430\u0441\u0443\u0439\u0442\u0435 \u0431\u0443\u0434\u044C-\u043A\u043E\u043B\u0438. \u0426\u0456\u043D\u0438 \u0432\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u044E\u044E\u0442\u044C\u0441\u044F \u0432 \u0434\u043E\u0434\u0430\u0442\u043A\u0443 \u0447\u0435\u0440\u0435\u0437 App Store / Google Play.",
+        lang_title: "\u0412\u0430\u0448\u0430 \u043C\u043E\u0432\u0430",
+        lang_desc: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u0430 4 \u043C\u043E\u0432\u0430\u043C\u0438 \u0437 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u0438\u043C \u0432\u0438\u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F\u043C \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0456 \u043D\u0430\u043B\u0430\u0448\u0442\u0443\u0432\u0430\u043D\u044C \u043F\u0440\u0438\u0441\u0442\u0440\u043E\u044E.",
+        dl_title: "\u041F\u043E\u0447\u043D\u0456\u0442\u044C \u0441\u0432\u043E\u044E \u043F\u043E\u0434\u043E\u0440\u043E\u0436",
+        dl_desc: "\u0417\u0430\u0432\u0430\u043D\u0442\u0430\u0436\u0442\u0435 Vedic Horoscope \u0456 \u0432\u0456\u0434\u043A\u0440\u0438\u0439\u0442\u0435 \u043A\u043E\u0441\u043C\u0456\u0447\u043D\u0443 \u043C\u0443\u0434\u0440\u0456\u0441\u0442\u044C, \u0437\u0430\u043F\u0438\u0441\u0430\u043D\u0443 \u0443 \u0432\u0430\u0448\u0438\u0445 \u0437\u0456\u0440\u043A\u0430\u0445. \u041F\u0435\u0440\u0448\u0438\u0439 \u043E\u0434\u0447\u0438\u0442 \u0431\u0435\u0437\u043A\u043E\u0448\u0442\u043E\u0432\u043D\u0438\u0439.",
+        footer_privacy: "Privacy Policy",
+        footer_terms: "Terms of Service",
+        footer_contact: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442"
+      },
+      cs: {
+        meta_title: "Vedic Horoscope — Va\u0161e denn\u00ED v\u00E9dsk\u00E1 moudrost",
+        meta_desc: "Objevte sv\u016Fj osud s v\u00E9dskou astrologi\u00ED posilovanou AI. Denn\u00ED horoskopy, nat\u00E1ln\u00ED karty a personalizovan\u00E9 kosmick\u00E9 vhledy zalo\u017Een\u00E9 na tradici Jyotish.",
+        nav_features: "Funkce",
+        nav_how: "Jak to funguje",
+        nav_pricing: "Cen\u00EDk",
+        nav_download: "St\u00E1hnout",
+        hero_tagline: "Prastar\u00E1 moudrost, modern\u00ED pohled",
+        hero_desc: "Objevte svou kosmickou cestu s v\u00E9dskou astrologi\u00ED posilovanou AI. Personalizovan\u00E9 denn\u00ED horoskopy a nat\u00E1ln\u00ED karty zalo\u017Een\u00E9 na tradici Jyotish — vytvo\u0159en\u00E9 unik\u00E1tn\u011B pro v\u00E1s.",
+        hero_cta: "Za\u010D\u00EDt",
+        hero_learn: "Zjistit v\u00EDce",
+        feat_title: "Funkce",
+        feat_daily_h: "Denn\u00ED horoskop",
+        feat_daily_p: "AI generovan\u00E9 v\u00FDklady na z\u00E1klad\u011B va\u0161\u00ED porodn\u00ED karty, aktu\u00E1ln\u00EDch planet\u00E1rn\u00EDch tranzit\u016F, p\u0159\u00EDzniv\u00FDch hodin (muhurta) a osobn\u00ED denn\u00ED mantry.",
+        feat_natal_h: "Nat\u00E1ln\u00ED karta (Kundali)",
+        feat_natal_p: "Kompletn\u00ED anal\u00FDza porodn\u00ED karty v\u010Detn\u011B Ra\u0161i, Nak\u0161ater a Da\u0161 — v\u00E1\u0161 kosmick\u00FD pl\u00E1n dek\u00F3dovan\u00FD pokro\u010Dilou AI.",
+        feat_personal_h: "Personalizace",
+        feat_personal_p: "Kontextov\u00E9 vhledy obohacen\u00E9 o va\u0161i polohu, po\u010Das\u00ED, f\u00E1zi m\u011Bs\u00EDce a kalend\u00E1\u0159 — ka\u017Ed\u00FD v\u00FDklad je unik\u00E1tn\u011B v\u00E1\u0161.",
+        feat_history_h: "Historie",
+        feat_history_p: "P\u0159\u00EDstup k posledn\u00EDm 30 v\u00FDklad\u016Fm kdykoli. Sledujte svou kosmickou cestu a pozorujte, jak se nebesk\u00E9 vzory vyv\u00EDjej\u00ED v \u010Dase.",
+        feat_lang_h: "V\u00EDcejazy\u010Dnost",
+        feat_lang_p: "K dispozici v pol\u0161tin\u011B, angli\u010Dtin\u011B, ukrajin\u0161tin\u011B a \u010De\u0161tin\u011B. Kosmick\u00E1 moudrost ve va\u0161em jazyce.",
+        feat_notif_h: "Denn\u00ED notifikace",
+        feat_notif_p: "Za\u010D\u00EDnejte ka\u017Ed\u00E9 r\u00E1no s kosmick\u00FDm veden\u00EDm. P\u0159ij\u00EDmejte personalizovan\u00E9 notifikace o horoskopu v \u010Das, kter\u00FD v\u00E1m vyhovuje.",
+        phone_daily_sub: "V\u00E1\u0161 personalizovan\u00FD kosmick\u00FD v\u00FDklad",
+        phone_natal_sub: "Kompletn\u00ED anal\u00FDza Kundali",
+        tab_history: "Historie",
+        tab_settings: "Nastaven\u00ED",
+        showcase_title: "V\u00E1\u0161 osobn\u00ED astrolog",
+        showcase_desc: "Vedic Horoscope kombinuje prastarou moudrost Jyotish se silou um\u011Bl\u00E9 inteligence a p\u0159in\u00E1\u0161\u00ED v\u00FDklady hluboce osobn\u00ED, kontextov\u00E9 a kr\u00E1sn\u011B prezentovan\u00E9.",
+        showcase_li1: "V\u00FDklady zalo\u017Een\u00E9 na re\u00E1ln\u00FDch poloh\u00E1ch planet",
+        showcase_li2: "Personalizov\u00E1no va\u0161imi p\u0159esn\u00FDmi \u00FAdaji o narozen\u00ED",
+        showcase_li3: "Kontextov\u00E9: po\u010Das\u00ED, f\u00E1ze m\u011Bs\u00EDce, poloha",
+        showcase_li4: "Kr\u00E1sn\u00E9 sd\u00EDliteln\u00E9 kosmick\u00E9 karty",
+        showcase_li5: "K dispozici ve 4 jazyc\u00EDch",
+        showcase_li6: "Dostupn\u00E9 verze Premium a zdarma",
+        showcase_cta: "Vyzkou\u0161ejte zdarma",
+        how_title: "Jak to funguje",
+        step1_h: "Zadejte \u00FAdaje o narozen\u00ED",
+        step1_p: "Datum, \u010Das a m\u00EDsto narozen\u00ED — z\u00E1klad va\u0161\u00ED v\u00E9dsk\u00E9 karty.",
+        step2_h: "AI analyzuje va\u0161i kartu",
+        step2_p: "Pokro\u010Dil\u00E1 AI vypo\u010D\u00EDt\u00E1 pozice planet, tranzity a v\u00E9dsk\u00E9 aspekty.",
+        step3_h: "P\u0159ijm\u011Bte sv\u016Fj v\u00FDklad",
+        step3_p: "Personalizovan\u00FD, kr\u00E1sn\u011B form\u00E1tovan\u00FD horoskop — unik\u00E1tn\u00ED pro tento moment.",
+        fortune_text: "\u201EHv\u011Bzdy naklán\u011Bj\u00ED, nenut\u00ED. Va\u0161e porodn\u00ED karta nen\u00ED v\u011Bzen\u00ED — je to mapa mo\u017Enost\u00ED. Vyu\u017Eijte jej\u00ED moudrosti k navigaci svou cestou s gr\u00E1ci\u00ED.\u201C",
+        price_free_sub: "Nav\u017Edy zdarma",
+        price_prem_sub: "Odemkn\u011Bte sv\u016Fj pln\u00FD kosmick\u00FD potenci\u00E1l",
+        price_badge: "NEJLEP\u0160\u00CD NAB\u00CDDKA",
+        price_f1: "4 denn\u00ED horoskopy / m\u011Bs\u00EDc",
+        price_f2: "1 bezplatn\u00FD nat\u00E1ln\u00ED v\u00FDklad",
+        price_f3: "P\u0159\u00EDstup k historii",
+        price_f4: "V\u0161echny 4 jazyky",
+        price_f5: "Neomezen\u00E9 v\u00FDklady",
+        price_f6: "Pln\u00E1 personalizace",
+        price_p1: "Neomezen\u00E9 denn\u00ED horoskopy",
+        price_p2: "Neomezen\u00E9 nat\u00E1ln\u00ED v\u00FDklady",
+        price_p3: "Pln\u00FD p\u0159\u00EDstup k historii",
+        price_p5: "Neomezen\u00E9 v\u00FDklady",
+        price_p6: "Pln\u00E1 kontextov\u00E1 personalizace",
+        price_go_prem: "P\u0159ej\u00EDt na Premium",
+        price_cancel: "Zru\u0161te kdykoli. Ceny nastaveny v aplikaci p\u0159es App Store / Google Play.",
+        lang_title: "V\u00E1\u0161 jazyk",
+        lang_desc: "K dispozici ve 4 jazyc\u00EDch s automatickou detekc\u00ED na z\u00E1klad\u011B nastaven\u00ED va\u0161eho za\u0159\u00EDzen\u00ED.",
+        dl_title: "Za\u010Dn\u011Bte svou cestu",
+        dl_desc: "St\u00E1hn\u011Bte Vedic Horoscope a objevte kosmickou moudrost zapsanou ve va\u0161ich hv\u011Bzd\u00E1ch. Prvn\u00ED v\u00FDklad je zdarma.",
+        footer_privacy: "Z\u00E1sady ochrany soukrom\u00ED",
+        footer_terms: "Podm\u00EDnky slu\u017Eby",
+        footer_contact: "Kontakt"
+      }
+    };
+
+    // ── Language engine ──
+    let currentLang = 'en';
+
+    function detectLang() {
+      const saved = localStorage.getItem('vh_lang');
+      if (saved && T[saved]) return saved;
+      const nav = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      if (nav.startsWith('pl')) return 'pl';
+      if (nav.startsWith('uk')) return 'ua';
+      if (nav.startsWith('cs') || nav.startsWith('sk')) return 'cs';
+      return 'en';
+    }
+
+    function setLang(lang) {
+      if (!T[lang]) return;
+      currentLang = lang;
+      localStorage.setItem('vh_lang', lang);
+      document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
+
+      // Update text content
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const val = T[lang][key];
+        if (!val) return;
+        if (el.tagName === 'TITLE') {
+          document.title = val;
+        } else if (el.hasAttribute('data-i18n-attr')) {
+          el.setAttribute(el.getAttribute('data-i18n-attr'), val);
+        } else {
+          el.textContent = val;
+        }
+      });
+
+      // Update active pill
+      document.querySelectorAll('.lang-pill').forEach(p => {
+        p.classList.toggle('active', p.getAttribute('data-lang') === lang);
+      });
+    }
+
     // ── Starfield ──
     (function() {
       const field = document.getElementById('starfield');
@@ -1011,13 +1337,13 @@
     // ── Scroll reveal ──
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-        }
+        if (e.isIntersecting) e.target.classList.add('visible');
       });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── Init language ──
+    setLang(detectLang());
   </script>
 
 </body>
