@@ -287,6 +287,10 @@
     }
     .btn-secondary:hover { border-color: var(--gold); color: var(--cream); }
     .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .store-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+    .store-badge { display: inline-block; transition: transform 0.2s, opacity 0.2s; opacity: 0.9; }
+    .store-badge:hover { transform: translateY(-2px); opacity: 1; }
+    .store-badge svg { display: block; }
 
     /* ── Section Headers ── */
     .section-header {
@@ -1041,9 +1045,32 @@
           <span class="divider-line"></span>
         </div>
         <p style="font-size:16px; line-height:1.8; color:var(--text); max-width:500px; margin:24px auto 40px;" data-i18n="dl_desc">Download Vedic Horoscope and discover the cosmic wisdom written in your stars. Your first reading is free.</p>
-        <div class="hero-buttons">
-          <a href="#" class="btn-primary">&#63743; App Store</a>
-          <a href="#" class="btn-primary" style="background:var(--cream);">&#9654; Google Play</a>
+        <div class="store-buttons">
+          <a href="#" class="store-badge" aria-label="Download on the App Store">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="150" height="50">
+              <rect width="120" height="40" rx="5" fill="#000"/>
+              <rect x=".5" y=".5" width="119" height="39" rx="4.5" fill="none" stroke="#a6a6a6"/>
+              <text x="42" y="12" fill="#fff" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="5.5">Download on the</text>
+              <text x="42" y="24" fill="#fff" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="11" font-weight="600">App Store</text>
+              <g fill="#fff" transform="translate(12,7) scale(0.55)">
+                <path d="M22.1 17.3c0-3.4 2.8-5.1 2.9-5.1-1.6-2.3-4-2.6-4.9-2.7-2.1-.2-4 1.2-5.1 1.2-1.1 0-2.7-1.2-4.5-1.1-2.3 0-4.4 1.3-5.6 3.4-2.4 4.1-.6 10.3 1.7 13.6 1.1 1.6 2.5 3.5 4.3 3.4 1.7-.1 2.4-1.1 4.4-1.1 2.1 0 2.7 1.1 4.5 1.1 1.8 0 3.1-1.7 4.2-3.3 1.3-1.9 1.9-3.7 1.9-3.8-.1 0-3.7-1.4-3.8-5.6zM18.6 7.5c.9-1.1 1.6-2.7 1.4-4.3-1.4.1-3 .9-4 2-.9 1-1.6 2.6-1.4 4.2 1.5.1 3.1-.8 4-1.9z"/>
+              </g>
+            </svg>
+          </a>
+          <a href="#" class="store-badge" aria-label="Get it on Google Play">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135 40" width="168" height="50">
+              <rect width="135" height="40" rx="5" fill="#000"/>
+              <rect x=".5" y=".5" width="134" height="39" rx="4.5" fill="none" stroke="#a6a6a6"/>
+              <text x="48" y="12" fill="#b3b3b3" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="5.5" text-transform="uppercase">GET IT ON</text>
+              <text x="48" y="25" fill="#fff" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="11" font-weight="600">Google Play</text>
+              <g transform="translate(10,6)">
+                <path d="M7.1 3.4L18.7 14l-3.3 3.3L3.8 5.5C4.6 4.1 5.7 3.4 7.1 3.4z" fill="#36A852"/>
+                <path d="M3.1 6.4v15.3c0 .4.1.8.3 1.1L15.4 14 3.4 5.3c-.2.3-.3.7-.3 1.1z" fill="#4285F4"/>
+                <path d="M3.8 23.5l11.6-11.8L18.7 15 7.1 25.6c-1.4 0-2.5-.7-3.3-2.1z" fill="#EA4335"/>
+                <path d="M18.7 14l4.7-4.7c.7.7.7 1.7 0 2.4l-1.4 1.4 1.4 1.4c.7.7.7 1.7 0 2.4L18.7 14z" fill="#FBBC04"/>
+              </g>
+            </svg>
+          </a>
         </div>
       </div>
     </div>
