@@ -476,6 +476,14 @@ Important:
 • This data is used only once to generate a single horoscope reading.
 • The user may withdraw consent at any time through the App settings.
 • The App is NOT a medical device and is not intended for health monitoring.</p>
+
+      <h2 id="waitlist-en">14. Website Waitlist</h2>
+      <p>If you join the waitlist on our website, we process your email address and your chosen language in order to send you a single notice that Vedic Horoscope has launched, and information about the web version of the service.
+
+• Legal basis: your consent (Article 6(1)(a) GDPR). Providing your email is voluntary.
+• Storage: the address is stored in a database hosted by Supabase Inc., which acts as our processor. We also record the date and version of the consent you gave. We do not store your IP address.
+• Retention: until you withdraw your consent, and no longer than 12 months after the launch announcement.
+• Withdrawal: write to daddyd3v@pm.me. Withdrawing consent does not affect processing carried out before it.</p>
     </div>
 
     <!-- POLISH -->
@@ -576,6 +584,14 @@ Ważne informacje:
 • Dane te są wykorzystywane wyłącznie jednorazowo w celu wygenerowania pojedynczego horoskopu.
 • Użytkownik może w każdej chwili wycofać zgodę w ustawieniach Aplikacji.
 • Aplikacja NIE jest urządzeniem medycznym i nie służy do monitorowania stanu zdrowia.</p>
+
+      <h2 id="waitlist-pl">14. Lista oczekujących na stronie WWW</h2>
+      <p>Jeśli zapiszesz się na listę oczekujących na naszej stronie, przetwarzamy Twój adres e-mail i wybrany język, aby wysłać Ci informację o premierze Vedic Horoscope oraz o wersji usługi w przeglądarce.
+
+• Podstawa prawna: Twoja zgoda (art. 6 ust. 1 lit. a RODO). Podanie adresu jest dobrowolne.
+• Przechowywanie: adres jest zapisany w bazie danych w usłudze Supabase Inc., która działa jako nasz podmiot przetwarzający. Zapisujemy też datę i wersję udzielonej zgody. Nie zapisujemy adresu IP.
+• Okres: do wycofania zgody, nie dłużej niż 12 miesięcy od ogłoszenia premiery.
+• Wycofanie zgody: napisz na daddyd3v@pm.me. Wycofanie zgody nie wpływa na zgodność z prawem przetwarzania sprzed jej wycofania.</p>
     </div>
 
     <!-- UKRAINIAN -->
@@ -674,6 +690,14 @@ Augusta Cieszkowskiego 1/3 m.5
 • Вони використовуються лише один раз для генерації одного гороскопу.
 • Користувач може відкликати згоду будь-коли в налаштуваннях Додатку.
 • Додаток НЕ є медичним пристроєм і не призначений для моніторингу стану здоров'я.</p>
+
+      <h2 id="waitlist-ua">14. Список очікування на вебсайті</h2>
+      <p>Якщо ви приєднуєтеся до списку очікування на нашому вебсайті, ми обробляємо вашу адресу e-mail та обрану мову, щоб надіслати вам повідомлення про запуск Vedic Horoscope та інформацію про веб-версію сервісу.
+
+• Правова підстава: ваша згода (ст. 6(1)(a) GDPR). Надання адреси є добровільним.
+• Зберігання: адреса зберігається в базі даних сервісу Supabase Inc., який діє як наш обробник. Ми також фіксуємо дату та версію наданої згоди. Ми не зберігаємо вашу IP-адресу.
+• Строк: до відкликання згоди, але не довше 12 місяців після оголошення запуску.
+• Відкликання згоди: напишіть на daddyd3v@pm.me. Відкликання згоди не впливає на законність обробки до її відкликання.</p>
     </div>
 
     <!-- CZECH -->
@@ -772,6 +796,14 @@ Důležité informace:
 • Jsou použity jednorázově pro vygenerování jednoho horoskopu.
 • Uživatel může souhlas kdykoli odvolat v nastavení Aplikace.
 • Aplikace NENÍ zdravotnickým prostředkem a neslouží k monitorování zdravotního stavu.</p>
+
+      <h2 id="waitlist-cs">14. Čekací listina na webu</h2>
+      <p>Pokud se zapíšete na čekací listinu na našem webu, zpracováváme vaši e-mailovou adresu a zvolený jazyk, abychom vám zaslali oznámení o spuštění Vedic Horoscope a informace o webové verzi služby.
+
+• Právní základ: váš souhlas (čl. 6 odst. 1 písm. a) GDPR). Poskytnutí adresy je dobrovolné.
+• Uložení: adresa je uložena v databázi služby Supabase Inc., která jedná jako náš zpracovatel. Zaznamenáváme také datum a verzi uděleného souhlasu. Vaši IP adresu neukládáme.
+• Doba: do odvolání souhlasu, nejdéle 12 měsíců od oznámení spuštění.
+• Odvolání souhlasu: napište na daddyd3v@pm.me. Odvolání souhlasu nemá vliv na zákonnost zpracování před jeho odvoláním.</p>
     </div>
 
   </div>
@@ -882,6 +914,10 @@ Důležité informace:
       else if (nav.startsWith('uk')) lang = 'ua';
       else if (nav.startsWith('cs') || nav.startsWith('sk')) lang = 'cs';
       setLang(lang);
+      if (location.hash === '#waitlist') {
+        const target = document.getElementById('waitlist-' + lang);
+        if (target) target.scrollIntoView();
+      }
     })();
   </script>
 

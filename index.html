@@ -817,7 +817,24 @@
       margin-bottom: 24px;
       line-height: 1.6;
     }
-    .modal-form { display: flex; gap: 8px; }
+    .modal-form { display: flex; flex-direction: column; gap: 12px; }
+    .modal-row { display: flex; gap: 8px; }
+    .modal-consent {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      text-align: left;
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-dim);
+      cursor: pointer;
+    }
+    .modal-consent input { margin-top: 2px; accent-color: var(--gold); flex-shrink: 0; }
+    .modal-consent a { color: var(--gold); }
+    .modal-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .modal-error { display: none; color: #ff8a80; font-size: 13px; text-align: left; }
+    .modal-error.show { display: block; }
+    .modal-submit:disabled { opacity: 0.6; cursor: wait; }
     .modal-input {
       flex: 1;
       background: rgba(17,22,51,1);
@@ -853,7 +870,7 @@
     }
     .modal-success.show { display: block; }
     @media (max-width: 480px) {
-      .modal-form { flex-direction: column; }
+      .modal-row { flex-direction: column; }
       .modal { padding: 32px 20px; }
     }
   </style>
@@ -1192,9 +1209,20 @@
       <div class="modal-icon">&#10022;</div>
       <h3 class="modal-title" data-i18n="wl_title">Coming Soon</h3>
       <p class="modal-desc" data-i18n="wl_desc">We're currently in testing. Join the waitlist and be the first to know when Vedic Horoscope launches!</p>
-      <form class="modal-form" id="waitlistForm" action="YOUR_FORMSPREE_ENDPOINT" method="POST" onsubmit="return submitWaitlist(event)">
-        <input type="email" name="email" class="modal-input" placeholder="your@email.com" required data-i18n-placeholder="wl_placeholder" />
-        <button type="submit" class="modal-submit" data-i18n="wl_submit">Join</button>
+      <form class="modal-form" id="waitlistForm" novalidate onsubmit="return submitWaitlist(event)">
+        <div class="modal-row">
+          <input type="email" id="wlEmail" name="email" class="modal-input" placeholder="your@email.com" required autocomplete="email" maxlength="254" data-i18n-placeholder="wl_placeholder" />
+          <button type="submit" id="wlSubmit" class="modal-submit" data-i18n="wl_submit">Join</button>
+        </div>
+        <label class="modal-consent" for="wlConsent">
+          <input type="checkbox" id="wlConsent" name="consent" required />
+          <span><span data-i18n="wl_consent">I agree to receive an email about the Vedic Horoscope launch. I can withdraw my consent at any time.</span> <a href="privacy.html#waitlist" target="_blank" rel="noopener" data-i18n="wl_privacy">Privacy Policy</a></span>
+        </label>
+        <div class="modal-hp" aria-hidden="true">
+          <label for="wlCompany">Company</label>
+          <input type="text" id="wlCompany" name="company" tabindex="-1" autocomplete="off" />
+        </div>
+        <p class="modal-error" id="waitlistError" role="alert"></p>
       </form>
       <p class="modal-success" id="waitlistSuccess" data-i18n="wl_success">&#10003; You're on the list! We'll let you know.</p>
     </div>
@@ -1275,7 +1303,13 @@
         wl_desc: "We're currently in testing. Join the waitlist and be the first to know when Vedic Horoscope launches!",
         wl_placeholder: "your@email.com",
         wl_submit: "Join",
-        wl_success: "\u2713 You're on the list! We'll let you know."
+        wl_success: "\u2713 You're on the list! We'll let you know.",
+        wl_consent: "I agree to receive an email about the Vedic Horoscope launch. I can withdraw my consent at any time.",
+        wl_privacy: "Privacy Policy",
+        wl_sending: "Sending…",
+        wl_err_email: "Enter a valid email address.",
+        wl_err_consent: "Tick the consent box to join the list.",
+        wl_err_server: "Couldn't save your email. Try again in a moment."
       },
       pl: {
         meta_title: "Vedic Horoscope — Twoja codzienna wedyjska m\u0105dro\u015B\u0107",
@@ -1349,7 +1383,13 @@
         wl_desc: "Aplikacja jest w fazie test\u00F3w. Do\u0142\u0105cz do listy oczekuj\u0105cych i dowiedz si\u0119 pierwszy o premierze!",
         wl_placeholder: "twoj@email.com",
         wl_submit: "Do\u0142\u0105cz",
-        wl_success: "\u2713 Jeste\u015B na li\u015Bcie! Damy Ci zna\u0107."
+        wl_success: "\u2713 Jeste\u015B na li\u015Bcie! Damy Ci zna\u0107.",
+        wl_consent: "Zgadzam się na otrzymanie e-maila o premierze Vedic Horoscope. Mogę wycofać zgodę w każdej chwili.",
+        wl_privacy: "Polityka prywatności",
+        wl_sending: "Wysyłanie…",
+        wl_err_email: "Wpisz poprawny adres e-mail.",
+        wl_err_consent: "Zaznacz zgodę, aby dołączyć do listy.",
+        wl_err_server: "Nie udało się zapisać adresu. Spróbuj ponownie za chwilę."
       },
       ua: {
         meta_title: "Vedic Horoscope — \u0412\u0430\u0448\u0430 \u0449\u043E\u0434\u0435\u043D\u043D\u0430 \u0432\u0435\u0434\u0438\u0447\u043D\u0430 \u043C\u0443\u0434\u0440\u0456\u0441\u0442\u044C",
@@ -1423,7 +1463,13 @@
         wl_desc: "\u0414\u043E\u0434\u0430\u0442\u043E\u043A \u0437\u0430\u0440\u0430\u0437 \u0442\u0435\u0441\u0442\u0443\u0454\u0442\u044C\u0441\u044F. \u041F\u0440\u0438\u0454\u0434\u043D\u0430\u0439\u0442\u0435\u0441\u044F \u0434\u043E \u0441\u043F\u0438\u0441\u043A\u0443 \u043E\u0447\u0456\u043A\u0443\u0432\u0430\u043D\u043D\u044F \u0456 \u0434\u0456\u0437\u043D\u0430\u0439\u0442\u0435\u0441\u044F \u043F\u0435\u0440\u0448\u0438\u043C\u0438 \u043F\u0440\u043E \u0437\u0430\u043F\u0443\u0441\u043A!",
         wl_placeholder: "vash@email.com",
         wl_submit: "\u041F\u0440\u0438\u0454\u0434\u043D\u0430\u0442\u0438\u0441\u044F",
-        wl_success: "\u2713 \u0412\u0438 \u0443 \u0441\u043F\u0438\u0441\u043A\u0443! \u041C\u0438 \u0434\u0430\u043C\u043E \u0437\u043D\u0430\u0442\u0438."
+        wl_success: "\u2713 \u0412\u0438 \u0443 \u0441\u043F\u0438\u0441\u043A\u0443! \u041C\u0438 \u0434\u0430\u043C\u043E \u0437\u043D\u0430\u0442\u0438.",
+        wl_consent: "Я погоджуюся отримати лист про запуск Vedic Horoscope. Я можу відкликати згоду в будь-який момент.",
+        wl_privacy: "Політика конфіденційності",
+        wl_sending: "Надсилання…",
+        wl_err_email: "Введіть правильну адресу e-mail.",
+        wl_err_consent: "Позначте згоду, щоб приєднатися до списку.",
+        wl_err_server: "Не вдалося зберегти адресу. Спробуйте ще раз за хвилину."
       },
       cs: {
         meta_title: "Vedic Horoscope — Va\u0161e denn\u00ED v\u00E9dsk\u00E1 moudrost",
@@ -1497,7 +1543,13 @@
         wl_desc: "Aplikace se pr\u00E1v\u011B testuje. P\u0159ipojte se k \u010Dekac\u00ED listin\u011B a bu\u010Fte prvn\u00ED, kdo se dozv\u00ED o spu\u0161t\u011Bn\u00ED!",
         wl_placeholder: "vas@email.com",
         wl_submit: "P\u0159ipojit",
-        wl_success: "\u2713 Jste na seznamu! D\u00E1me v\u00E1m v\u011Bd\u011Bt."
+        wl_success: "\u2713 Jste na seznamu! D\u00E1me v\u00E1m v\u011Bd\u011Bt.",
+        wl_consent: "Souhlasím se zasláním e-mailu o spuštění Vedic Horoscope. Souhlas mohu kdykoli odvolat.",
+        wl_privacy: "Zásady ochrany osobních údajů",
+        wl_sending: "Odesílání…",
+        wl_err_email: "Zadejte platnou e-mailovou adresu.",
+        wl_err_consent: "Zaškrtněte souhlas, abyste se mohli připojit.",
+        wl_err_server: "E-mail se nepodařilo uložit. Zkuste to za chvíli znovu."
       }
     };
 
@@ -1555,26 +1607,53 @@
       document.getElementById('waitlistModal').classList.remove('open');
       document.body.style.overflow = '';
     }
+    const WAITLIST_ENDPOINT = 'https://xtzxdxtggigizjnodgzz.supabase.co/functions/v1/waitlist-signup';
+    const WAITLIST_CONSENT_VERSION = 'waitlist-v1';
+
+    function showWaitlistError(key) {
+      const el = document.getElementById('waitlistError');
+      el.textContent = T[currentLang][key] || T.en[key];
+      el.classList.add('show');
+    }
+
     function submitWaitlist(e) {
       e.preventDefault();
       const form = document.getElementById('waitlistForm');
-      const endpoint = form.getAttribute('action');
-      if (endpoint === 'YOUR_FORMSPREE_ENDPOINT') {
-        // Endpoint not configured yet — just show success
-        form.style.display = 'none';
-        document.getElementById('waitlistSuccess').classList.add('show');
-        return false;
-      }
-      fetch(endpoint, {
+      const email = document.getElementById('wlEmail').value.trim();
+      const consent = document.getElementById('wlConsent').checked;
+      const btn = document.getElementById('wlSubmit');
+      document.getElementById('waitlistError').classList.remove('show');
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { showWaitlistError('wl_err_email'); return false; }
+      if (!consent) { showWaitlistError('wl_err_consent'); return false; }
+
+      btn.disabled = true;
+      btn.textContent = T[currentLang].wl_sending;
+      fetch(WAITLIST_ENDPOINT, {
         method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      }).then(r => {
-        form.style.display = 'none';
-        document.getElementById('waitlistSuccess').classList.add('show');
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          lang: currentLang,
+          consent: WAITLIST_CONSENT_VERSION,
+          company: document.getElementById('wlCompany').value
+        })
+      }).then(r => r.json().catch(() => ({})).then(data => ({ ok: r.ok, data }))).then(({ ok, data }) => {
+        if (ok && data.ok) {
+          form.style.display = 'none';
+          document.getElementById('waitlistSuccess').classList.add('show');
+        } else if (data.error === 'invalid_email') {
+          showWaitlistError('wl_err_email');
+        } else if (data.error === 'consent_required') {
+          showWaitlistError('wl_err_consent');
+        } else {
+          showWaitlistError('wl_err_server');
+        }
       }).catch(() => {
-        form.style.display = 'none';
-        document.getElementById('waitlistSuccess').classList.add('show');
+        showWaitlistError('wl_err_server');
+      }).finally(() => {
+        btn.disabled = false;
+        btn.textContent = T[currentLang].wl_submit;
       });
       return false;
     }
